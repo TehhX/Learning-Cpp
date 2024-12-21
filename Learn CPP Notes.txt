@@ -1,0 +1,16 @@
+Currently at chapter 1.6 at learncpp.com
+
+- Use direct-list initialization: int x { value }; for various reasons including:
+    - Value Must be of type int (or whatever the data type is), or compiler will give an error (Easier to bug-fix)
+      i.e. int x {4.5} will give an error, 4.5 is not an integer
+    - Is the current/modern standard
+    - Does not involve copying data, more effecient
+    - Value initialization is of same format, i.e. x = {}; will set x to 0, thus easier to remember
+    
+- Can use extraction/insertion operators more than once
+  - i.e. cin >> x >> y >> z; will take values seperated by spaces and put them into x, then y, then z.
+
+- Declared variables are not initialized to any default values (unlike Java). int x; will not assing value 0 to x,
+  x will be unassigned. However, cout << x; will still print 0.
+
+- 
