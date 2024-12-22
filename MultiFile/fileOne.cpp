@@ -1,8 +1,6 @@
-#include <iostream>
-
-int add(int, int);
+#include "header.h"
 
 int main() {
-    std::cout << add(28, 5);
+    std::cout << "This is: " << add(28, 5) << '\n';
     return 0;
 }
