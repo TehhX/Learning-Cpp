@@ -1,11 +1,11 @@
-Currently at chapter 2.7 at learncpp.com
+Currently at chapter 2.9 at learncpp.com
 
 - Use direct-list initialization: int x { value }; for various reasons including:
-    - Value Must be of type int (or whatever the data type is), or compiler will give an error (Easier to bug-fix)
-      i.e. int x {4.5} will give an error, 4.5 is not an integer
-    - Is the current/modern standard
-    - Does not involve copying data, more effecient
-    - Value initialization is of same format, i.e. x = {}; will set x to 0, thus easier to remember
+  - Value Must be of type int (or whatever the data type is), or compiler will give an error (Easier to bug-fix)
+    i.e. int x {4.5} will give an error, 4.5 is not an integer
+  - Is the current/modern standard
+  - Does not involve copying data, more effecient
+  - Value initialization is of same format, i.e. x = {}; will set x to 0, thus easier to remember
     
 - Can use extraction/insertion operators more than once
   - i.e. cin >> x >> y >> z; will take values seperated by spaces and put them into x, then y, then z.
@@ -14,7 +14,16 @@ Currently at chapter 2.7 at learncpp.com
 
 - Statements like x = 5 use the expression 5, which has the return value of 5, and side effect of assigning 5 to x.
 
+- Main function always returns 0 implicitly (excluding error occurances obviously), so there is no need to put return 0; at the end.
+
 - Can place a function below main() so long as you use forward declaration. For the function int add(int x, int y) {...}, just declare it before
   main as int add(int, int); so that main can call the actual function below it. No parameter names are required in the declaration, just types.
+  However, naming them anyway is best practice. Use of forward declarations:
+  - Circular-referencing functions. If two functions call each other, it is impossible to bring both of them behind the other, given the
+    restrictions of spacetime.
+
+  - Functions of other files. One cannot reorder the functions behind main when they exist in seperate files.
+
+  - To help better organize code. If one wants to group functions, or sort them in a specific manner, forward declaration may be used.
 
 - 
