@@ -26,4 +26,11 @@ Currently at chapter 2.9 at learncpp.com
 
   - To help better organize code. If one wants to group functions, or sort them in a specific manner, forward declaration may be used.
 
-- 
+- Dont use 'using namespace', specifically declare what namespace you mean at execution (i.e. std::cout)
+
+- Macros can be used with the preprocessor. #define CAT DOG will replace all instances of CAT with DOG. It is unsafe, and reccomended against.
+
+- Macros CAN however be safely used for things shown in https://www.learncpp.com/cpp-tutorial/introduction-to-the-preprocessor/
+
+- Header files (example.h) can be used to insert many common lines of code or forward declarations into the start of a .cpp file with the
+  #include preprocessor directive.
