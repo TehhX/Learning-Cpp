@@ -1,4 +1,4 @@
-Currently at chapter 1.6 at learncpp.com
+Currently at chapter 2.7 at learncpp.com
 
 - Use direct-list initialization: int x { value }; for various reasons including:
     - Value Must be of type int (or whatever the data type is), or compiler will give an error (Easier to bug-fix)
@@ -10,7 +10,11 @@ Currently at chapter 1.6 at learncpp.com
 - Can use extraction/insertion operators more than once
   - i.e. cin >> x >> y >> z; will take values seperated by spaces and put them into x, then y, then z.
 
-- Declared variables are not initialized to any default values (unlike Java). int x; will not assing value 0 to x,
-  x will be unassigned. However, cout << x; will still print 0.
+- Declared variables are not initialized to any default values (unlike Java). int x; will not assing value 0 to x, x will be unassigned.
+
+- Statements like x = 5 use the expression 5, which has the return value of 5, and side effect of assigning 5 to x.
+
+- Can place a function below main() so long as you use forward declaration. For the function int add(int x, int y) {...}, just declare it before
+  main as int add(int, int); so that main can call the actual function below it. No parameter names are required in the declaration, just types.
 
 - 
