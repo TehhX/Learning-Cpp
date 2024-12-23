@@ -123,4 +123,21 @@ not only be included in fileOne.cpp, but also fileTwo.cpp.
   will default to false (or 0). This can be changed by the statement: "std::cin >> std::boolalpha;", which will allow (case-sensitive) "true" or "false" as input.
   However, it will NO LONGER accept 0's or 1's as input.
 
-- 
+- If the program expects a boolean (i.e. if (<boolean>) doThis();), an integer can be entered instead, where all non-zero values will be true, and 0 will be false.
+
+- Explicit static casting can be done as such: "static_cast<type>(expression)" i.e. "static_cast<int>(5.5)" will cast the double "5.5" to an integer "5".
+
+- Defining a constant variable goes as such: "const int {50};". The const should always go to the left of the type by convention. Varaibles that won't be changed
+  should, where possible, be set as constant. This removes the potential for error in regards to the variable, lets the compiler optimize the code now that it knows
+  the variable won't change, and reduces the complexity of a program.
+
+- Literals are values inserted directly into code, without names. In the following definition "int x {5}", x is NOT a literal, as it is a variable. The '5' is
+  is assigned to IS a literal, as it is an unnamed value. X has the name x, so it is not literal.
+
+- One may have the following issue: "float x { 1.6 };" gives an error, as "1.6" is seen as a literal of type double. One can either change x from type
+  float to type double, ergo "double x { 1.6 };", or change the input to a float, "float x { 1.6f };".
+
+- Writing in scientific notation is allowed by way of using exponents. Writing 1,000,000 can also be done as 1e+6 or 1e6. 0.000001 can also be written as 1e-6.
+
+- Other bases can be used. Writing in octal can be done by writing a zero before the octal i.e. 012 will be equal to 10. Writing in hexadecimal can be done
+  with the prefix "0x" instead of '0'. i.e. 0xFFF is equal to 4095 decimal. Binary numbers can be written by the prefix "0b". i.e. 0b1111 = 15. (Only after C++14)
