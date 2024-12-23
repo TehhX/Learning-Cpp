@@ -2,8 +2,6 @@
 #include <string_view>
 
 std::string_view getQuantityPhrase(int count) {
-    std::string toReturn {};
-
     switch (count) {
         case 0: return "no";
         case 1: return "a single";
@@ -12,6 +10,7 @@ std::string_view getQuantityPhrase(int count) {
     }
 
     if (count < 0) return "negative";
+    if (count > 6) return "too many";
     return "many";
 }
 
