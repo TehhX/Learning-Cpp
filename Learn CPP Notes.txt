@@ -131,6 +131,9 @@ not only be included in fileOne.cpp, but also fileTwo.cpp.
   should, where possible, be set as constant. This removes the potential for error in regards to the variable, lets the compiler optimize the code now that it knows
   the variable won't change, and reduces the complexity of a program.
 
+- Defining a constant variable can also be done with "constexpr". This will generate a compile-time error if it is not actually constant, as well as whatever
+  it is being defined as being constant itself. Whenever you can use "constexpr" over "const", do. For some cases however, "const" is the only/better choice.
+
 - Literals are values inserted directly into code, without names. In the following definition "int x {5}", x is NOT a literal, as it is a variable. The '5' is
   is assigned to IS a literal, as it is an unnamed value. X has the name x, so it is not literal.
 
@@ -141,3 +144,15 @@ not only be included in fileOne.cpp, but also fileTwo.cpp.
 
 - Other bases can be used. Writing in octal can be done by writing a zero before the octal i.e. 012 will be equal to 10. Writing in hexadecimal can be done
   with the prefix "0x" instead of '0'. i.e. 0xFFF is equal to 4095 decimal. Binary numbers can be written by the prefix "0b". i.e. 0b1111 = 15. (Only after C++14)
+
+- Using C-style strings is dangerous, and may sometimes produce undefined behavior. Using "std::string" of "#include <string>" is prefered in cases where the string
+  itelf is not literal. It allows string lengths to be changed, new values to be copied over, and is safer in general. However, things change when asking for input.
+  "std::cin" will break operation on whitespace, potentially breaking a program. In this case, "std::getline()" is preferable. There are arguments that must be
+  passed however. If one is trying to pass the input to a "std::string"-style string with variable name "name", write the following:
+  std::getline(std::cin >> std::ws, name). This passes the input as the first, and the variable to copy data to as the second. This will take the whole line, and
+  work as expected, just like before with the C-style string. The first argument technically only needs the "std::cin", but one may add the ">> std::ws" to
+  specify that leading whitespace should be removed. i.e. "    x" -> "x", but "x   " does not change (whitespace is not leading).
+
+- Add an 's' after a string literal to change it to a std::string literal. i.e. <"Hello"> is a C-Style literal, <"Hello"s> is an std::string style literal.
+
+- 
