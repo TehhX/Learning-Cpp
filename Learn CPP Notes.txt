@@ -68,4 +68,29 @@ not only be included in fileOne.cpp, but also fileTwo.cpp.
     #pragma once
     // The header file itself, such as forward declarations, other includes, etc.
 
-- 
+- One can debug programs by adding the debugging lines of code, whatever they may be, and then only passing them through the preprocessor if a certain term is
+  defined. For example, if one wants to only print out a line of code Line(); when debugging, one can place #ifdef ENABLE_DEBUG before, and #endif after. Then,
+  these lines will only be passed through and compiled when the uncommented line of code #define ENABLE_DEBUG is present at the top of the file. This allows the
+  inclusion and exclusion of certain lines of code, in this case debugging code, to only be compiled when that first line of code, #define ENABLE_DEBUG is present.
+  Example (std::cerr... will only be compiled if #define ENABLE_DEBUG is present and NOT commented out): 
+
+    #define ENABLE_DEBUG // comment out to disable debugging
+
+    int getUserInput() {
+      #ifdef ENABLE_DEBUG
+      std::cerr << "getUserInput() called\n";
+      #endif
+
+      std::cout << "Enter a number: ";
+      int x{};
+      std::cin >> x;
+      return x;
+    }
+
+ - Using a logger is also a possibility, like using <plog>. After initialization in main() via "plog::init(plog::debug, "Logfile.txt");" It will document any output by
+   way of using "PLOGD << <output-string>;, i.e. "PLOGD << "Function Called";" NOTE: PLOG IS NOT INSTALLED BY DEFAULT, MUST BE DOWNLOADED FROM WEBSITE AND PLACED
+   WITHIN INCLUDE FOLDERS! IT IS ALSO NOT THE ONLY LOGGER THAT EXISTS!
+
+ - Using an integrated debugger is also an option, like the one in VS Code. I skipped many chapters on integrated debuggers, go back to 3.xx to reread later if it becomes pertinent.
+
+ - 
