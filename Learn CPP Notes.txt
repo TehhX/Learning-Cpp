@@ -1,5 +1,3 @@
-Currently at chapter 2.9 at learncpp.com
-
 - Use direct-list initialization: int x { value }; for various reasons including:
   - Value Must be of type int (or whatever the data type is), or compiler will give an error (Easier to bug-fix)
     i.e. int x {4.5} will give an error, 4.5 is not an integer
@@ -33,4 +31,25 @@ Currently at chapter 2.9 at learncpp.com
 - Macros CAN however be safely used for things shown in https://www.learncpp.com/cpp-tutorial/introduction-to-the-preprocessor/
 
 - Header files (example.h) can be used to insert many common lines of code or forward declarations into the start of a .cpp file with the
-  #include preprocessor directive.
+  #include preprocessor directive. As for forward declarations, write them just the same as you would in the .cpp file. An example of this
+  and multi-file organization in general can be found in /MultiFile. The files within can be compiled and linked by typing either
+  "g++ fileOne.cpp fileTwo.cpp -0 MultiFile.<exe/out>" or "g++ *.cpp -o MultiFile.<exe/out>. The former only compiles and links
+  listed files, while the latter compiles and links all .cpp files in the directory. Both outputs will be named MultiFile.<exe/out>
+
+- Header files should also be included in their paired .cpp files, to stop simple errors from occuring. In MultiFile, this means it should
+not only be included in fileOne.cpp, but also fileTwo.cpp.
+
+- Using #include <x> will tell the preprocessor to check the include directories for a file we did not write. Using "x" will check\
+  right next to the .cpp/.h files for a file we DID write.
+
+- Header sorting should be as such:
+  - Paired header (in add.cpp, #include "add.h")
+  - Other headers of the same project (in x.cpp, #include "y.h")
+  - 3rd party headers (in x.cpp, #include <boost/tuple/tuple.hpp>)
+  - Standard library headers: (in x.cpp, #include <iostream>)
+
+- Header File Best Practices:
+  - Always include header guards
+  - Do not define variables/functions (for now)
+  - Paried .cpp and .h files should be named the same i.e. x.cpp and x.h
+  - Do not include .cpp files
