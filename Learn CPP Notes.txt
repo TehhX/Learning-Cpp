@@ -53,3 +53,19 @@ not only be included in fileOne.cpp, but also fileTwo.cpp.
   - Do not define variables/functions (for now)
   - Paried .cpp and .h files should be named the same i.e. x.cpp and x.h
   - Do not include .cpp files
+
+- Header guards help to stop duplicate declaration and initialization of functions and/or varaibles etc. They are simple to implement, just add
+  a #define at the start of header files with a unique name. The name, by standard convention, is the name of the header file in all uppercase
+  with underscores between words, and an H at the end. i.e. for a file named headerFile.h, use the definition #define HEADER_FILE_H. For the guard itself,
+  use the following (for a file named headerFile.h):
+    #ifndef HEADER_FILE_H
+    #define HEADER_FILE_H
+    // The header file itself, such as forward declarations, other includes, etc.
+    #endif
+  The code between #ifndef and #endif will only run if HEADER_FILE_H has not yet been defined. HEADER_FILE_H will be defined inside. This makes sure that
+  the ODR (One Definition Rule) is not left unfollowed, and certain compile/runtime errors are not made. "#pragma once" also works in place of a traditional
+  header guard in modern compilers, and is what most use (other than the old-heads at Google):
+    #pragma once
+    // The header file itself, such as forward declarations, other includes, etc.
+
+- 
