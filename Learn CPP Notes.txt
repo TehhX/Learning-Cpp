@@ -155,4 +155,4 @@ not only be included in fileOne.cpp, but also fileTwo.cpp.
 
 - Add an 's' after a string literal to change it to a std::string literal. i.e. <"Hello"> is a C-Style literal, <"Hello"s> is an std::string style literal.
 
-- 
+- One can use std::string_view to create a read-only version of a string literal.
