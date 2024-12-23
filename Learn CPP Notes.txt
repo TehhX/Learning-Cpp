@@ -91,6 +91,36 @@ not only be included in fileOne.cpp, but also fileTwo.cpp.
    way of using "PLOGD << <output-string>;, i.e. "PLOGD << "Function Called";" NOTE: PLOG IS NOT INSTALLED BY DEFAULT, MUST BE DOWNLOADED FROM WEBSITE AND PLACED
    WITHIN INCLUDE FOLDERS! IT IS ALSO NOT THE ONLY LOGGER THAT EXISTS!
 
- - Using an integrated debugger is also an option, like the one in VS Code. I skipped many chapters on integrated debuggers, go back to 3.xx to reread later if it becomes pertinent.
+ - Using an integrated debugger is also an option, like the one in VS Code. I skipped many chapters on integrated debuggers, go back to 3.xx to reread later
+   if it becomes pertinent.
 
- - 
+ - Refactoring is the act of changing the code of a program without changing its behavior
+
+ - Numbers are signed by default (use the first bit to define positive/negative), but can be unsigned by using the keyword i.e. unsigned int x {5};
+
+ - The standard library allows fixed-width integers (Must "#include <cstdint>" All have "std::" prefix):
+      int8_t  = 1 byte signed    = -128 -> 127
+      uint8_t = 1 byte unsigned  = 0 -> 255
+
+      int16_t  = 2 byte signed   = -32,768 -> 32,767
+      uint16_t = 2 byte unsigned = 0 -> 65,535
+
+      int32_t  = 4 byte signed   = -2,147,483,648 -> 2,147,483,647
+      uint32_t = 4 byte unsigned = 0 -> 4,294,967,295
+
+      int64_t  = 8 byte signed   = -9,223,372,036,854,775,808 -> 9,223,372,036,854,775,807
+      uint64_t = 8 byte unsigned = 0 -> 18,446,744,073,709,551,615
+
+- Append 'f' to a number to ensure it is of float type instead of the implied double i.e. "5.0" is a double, "5.0f" is a float.
+
+- Use "#include <iomanip>" and "std::cout << std::setprecision(int);" where int is the digits of precision for all future instances of "std::cout << <content>".
+  Using more precision than is allowed by a data type will result in strange digits after the actual precision ends.
+
+- Booleans will be printed by default as 1's and 0's, but the following command "std::cout << std::boolalpha;" will ensure all printing that occurs
+  after will be printed as true's and false's. "std::cout << std::noboolalpha;" can be inversely used to revert back to 1's and 0's.
+
+- When entering a boolean value by way of "std::cin >> <boolean>;", it must be entered as 0's or 1's, any other value (inluding words like true or false)
+  will default to false (or 0). This can be changed by the statement: "std::cin >> std::boolalpha;", which will allow (case-sensitive) "true" or "false" as input.
+  However, it will NO LONGER accept 0's or 1's as input.
+
+- 
