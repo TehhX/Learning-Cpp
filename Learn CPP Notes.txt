@@ -156,3 +156,31 @@ not only be included in fileOne.cpp, but also fileTwo.cpp.
 - Add an 's' after a string literal to change it to a std::string literal. i.e. <"Hello"> is a C-Style literal, <"Hello"s> is an std::string style literal.
 
 - One can use std::string_view to create a read-only version of a string literal.
+
+- User defined namespaces can be used to reduce collisions of functions and variables. Done as:
+    namespace NamespaceName {
+      int variableOne {valueOne};
+      void doSomething(int x, int y) {
+        // something to do
+      }
+    }
+  Namespaces should have every first letter be capitalized i.e. "Namespace" instead of "namespace"
+
+- Functions and variables in namespaces must be called with either a scope resolution operator i.e. for a function named "doSomething()" in namespace "Example" one
+  would call "doSomething()" by using "Example::doSomething()". If it is being called from within the same namespace, the operator is not required. But if the callee
+  is in the global namespace and one tries calling it from within a namespace, the global scope can be ensured by using the scope resolution operator without a prefix,
+  i.e. global function "doSomething()" can be called from namespace "Example" using the statement "::doSomething()". Without a namespace specified, it means the global
+  scope.
+
+- Forward declarations in header files also need to be in the same namespace as their corrosponding definition. i.e. for function "ExampleNamespace::doSomething()"
+  declared in "foo.cpp", if one wants to call it from "bar.cpp" with a header file, the namespace "ExampleNamespace" has to be used in the header file. Find an actual
+  example in Learning-Cpp/NamespaceHeader.
+
+- The same namespace can be declared across multiple files, and all within will be considered of the same namespace.
+
+- Namespaces can also be declared within other namespaces. i.e. for a parent namespace "Foo", child namespace "Bar", and function in namespace "Bar" named
+  "doSomething()", in the global namespace or a completley seperate namespace, the function would be called as "Foo::Bar::doSomething()".
+
+- Namespace aliases can be used to shorten the calling of certain namespaces. i.e. for the same example as before, using "namespace FoobarShortened = Foo::Bar;". from
+  then on, "Foo:Bar::doSomething()" can be called as "FoobarShortened::doSomething()". Obviously, this actually lengthens the scope resolution, but if we name it
+  something else, it would be more concise.
