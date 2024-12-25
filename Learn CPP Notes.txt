@@ -184,3 +184,14 @@ not only be included in fileOne.cpp, but also fileTwo.cpp.
 - Namespace aliases can be used to shorten the calling of certain namespaces. i.e. for the same example as before, using "namespace FoobarShortened = Foo::Bar;". from
   then on, "Foo:Bar::doSomething()" can be called as "FoobarShortened::doSomething()". Obviously, this actually lengthens the scope resolution, but if we name it
   something else, it would be more concise.
+
+- "std::swap" can be used with "#include <utility>". If one wants to swap variables 'x' and 'y', do: "std::swap(x, y);".
+
+- The "static" keyword can be used to make variables and functions only link within the file it is in, no other files can use it. Constexpr variables are static by default,
+  but can be made usable with other files by the "extern" keyword. Integers without the "constexpr" are external by default, and can be made static. Static variables and
+  functions use internal linkage, and extern(al) variables/functions use external linkage.
+
+- The "inline" keyword can be used when defining variables or functions in header files. This keyword will allow multiple definitions of the same variable/function being
+  included and duplicated into multiple .cpp files, so long as they are all identical. The compiler/linker will also remove duplicates at compile time.
+
+- 
