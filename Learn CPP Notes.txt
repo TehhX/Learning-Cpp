@@ -19,9 +19,7 @@
   However, naming them anyway is best practice. Use of forward declarations:
   - Circular-referencing functions. If two functions call each other, it is impossible to bring both of them behind the other, given the
     restrictions of spacetime.
-
   - Functions of other files. One cannot reorder the functions behind main when they exist in seperate files.
-
   - To help better organize code. If one wants to group functions, or sort them in a specific manner, forward declaration may be used.
 
 - Dont use 'using namespace', specifically declare what namespace you mean at execution (i.e. std::cout)
@@ -194,4 +192,12 @@ not only be included in fileOne.cpp, but also fileTwo.cpp.
 - The "inline" keyword can be used when defining variables or functions in header files. This keyword will allow multiple definitions of the same variable/function being
   included and duplicated into multiple .cpp files, so long as they are all identical. The compiler/linker will also remove duplicates at compile time.
 
-- 
+- Find examples of declaring/defining/initializing variables and functions in header files within Learning-Cpp/HeaderConstants
+
+- The many static keyword definitions:
+  - Static Duration: Variables that are created on program start, and destroyed on program exit. For example, global variables have a static duration.
+  - Global variables with a static prefix are made internally linked.
+  - Local variables with the static prefix will be created at the start of the program, and destroyed at program exit. This is just like how un-prefixed global variables
+    work. However, these local variables will only be initialized once, so as to avoid errors. An example can be found at "Learning-Cpp/Assorted/staticVariables.cpp".
+    These static-local variables can be used to generate a new copy of an integer/other type every function call, while keeping track of what increment the variable
+    should be.
