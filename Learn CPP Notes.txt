@@ -96,7 +96,7 @@ not only be included in fileOne.cpp, but also fileTwo.cpp.
 
  - Numbers are signed by default (use the first bit to define positive/negative), but can be unsigned by using the keyword i.e. unsigned int x {5};
 
- - The standard library allows fixed-width integers (Must "#include <cstdint>" All have "std::" prefix):
+ - The standard library allows fixed-width integers (Must "#include <cstdint>" All have "std::" prefix) (Value range shown: "min -> max"):
       int8_t  = 1 byte signed    = -128 -> 127
       uint8_t = 1 byte unsigned  = 0 -> 255
 
@@ -218,3 +218,7 @@ not only be included in fileOne.cpp, but also fileTwo.cpp.
 
 - The fallthrough statement can be used to indicate intentional fallthrough. Place "[[fallthrough]]" at the end of a case. Example in last point. It doesn't do anything
   other than show that fallthrough is intentional, and potentially disable some compuler warnings, as the code will execute just the same without it.
+
+- The "goto" keyword can jump to a particular part of the program by a label. An example can be found in "./Assorted/gotoBackwards.cpp". The goto label can also jump
+  forwards, found in "./Assorted/gotoForwards.cpp". Goto statements do not need to be declared by the time they're called, like variables and functions do. Goto
+  statements are generally unused, but may have some small and specific uses.
