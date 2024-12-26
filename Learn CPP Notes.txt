@@ -201,3 +201,20 @@ not only be included in fileOne.cpp, but also fileTwo.cpp.
     work. However, these local variables will only be initialized once, so as to avoid errors. An example can be found at "Learning-Cpp/Assorted/staticVariables.cpp".
     These static-local variables can be used to generate a new copy of an integer/other type every function call, while keeping track of what increment the variable
     should be.
+
+- Constexpr if statements can be used if constexpr variables defined before are a part of the condition. "./Assorted/constexprIf.cpp" is an example.
+
+- Don't indent switch statement cases:
+    switch (value) {
+    case x:
+      doX();
+      return;
+    case y:
+      doY():
+      [[fallthrough]];
+    default:
+      doDefault();
+    }
+
+- The fallthrough statement can be used to indicate intentional fallthrough. Place "[[fallthrough]]" at the end of a case. Example in last point. It doesn't do anything
+  other than show that fallthrough is intentional, and potentially disable some compuler warnings, as the code will execute just the same without it.
