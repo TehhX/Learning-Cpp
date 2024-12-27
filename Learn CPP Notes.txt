@@ -269,3 +269,6 @@ not only be included in fileOne.cpp, but also fileTwo.cpp.
   can also use default parameters. Certain input types can be deleted with the "= delete;" suffix, replacing all type placeholders with whatever should
   not be allowed. Local static keywords will not keep their value between different type implementations of the template. This is because the compiler
   makes different functions for the template when they are required.
+
+- Templates can have multiple wildcard types. When returning a value from multiple types, the auto keyword can be useful. It will deduce the correct return
+  type, and return it as such.
