@@ -222,3 +222,22 @@ not only be included in fileOne.cpp, but also fileTwo.cpp.
 - The "goto" keyword can jump to a particular part of the program by a label. An example can be found in "./Assorted/gotoBackwards.cpp". The goto label can also jump
   forwards, found in "./Assorted/gotoForwards.cpp". Goto statements do not need to be declared by the time they're called, like variables and functions do. Goto
   statements are generally unused, but may have some small and specific uses.
+
+- Modulus usage example in "./Assorted/fizzBuzz.cpp".
+
+- The "continue" keyword can be used to break out of the current iteration of a loop statement, but continue to loop through it starting at the next index, or beginning.
+  This keyword is used similarly to the "break" keyword, but doesn't completley exit the loop.
+
+- A running program can be called before main() ends by using "#include <cstdlib> {...} std::exit();" Also, "std::atexit(<function>);" will call <function>,
+  and then exit the program as "std::exit();" does after <function> completes.
+
+- Random numbers in C++ can be generated using multiple functions from "#include <random>". First, a random number for the seed needs to be picked or otherwidse generated.
+  A single random number can be taken from "std::random_device", and put into the Mersenne Twister algorithm. It should be input multiple times (8 minimum) to help seed
+  the MT algorithm. A uniform integer distributor can be used to distribute random numbers taken from this algorithm, and distribute the numbers between a minimum and
+  maximum. Multiple different distributors can be used with the same RNG. An example of an RNG can be found in "./Assorted/randomNumber.cpp".
+
+- Assertive statements with "#include <cassert>" can detect problems and end the program. Regular assertions i.e. "assert(<true_thing>);" can become more descriptive,
+  i.e. "assert(<true_thing> && <string_literal>);" will print to the console what was false, and the string literal passed to it. This helps with error logging.
+  However, asserts should not be used in production code, only to help with debugging. 
+
+- Static assertive statements can be used to evaluate code at compile time, without needing an "#include" header. "static_assert(<true_thing>, <string_literal>);".
