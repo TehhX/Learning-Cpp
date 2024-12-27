@@ -237,7 +237,35 @@ not only be included in fileOne.cpp, but also fileTwo.cpp.
   maximum. Multiple different distributors can be used with the same RNG. An example of an RNG can be found in "./Assorted/randomNumber.cpp".
 
 - Assertive statements with "#include <cassert>" can detect problems and end the program. Regular assertions i.e. "assert(<true_thing>);" can become more descriptive,
-  i.e. "assert(<true_thing> && <string_literal>);" will print to the console what was false, and the string literal passed to it. This helps with error logging.
+  i.e. "assert(<true_thing> && <string>);" will print to the console what was false, and the string passed to it. This helps with error logging.
   However, asserts should not be used in production code, only to help with debugging. 
 
 - Static assertive statements can be used to evaluate code at compile time, without needing an "#include" header. "static_assert(<true_thing>, <string_literal>);".
+
+- There are multiple different explicit ways to cast a variable or literal. These include C and C++ style casts. C++ style casts have the benefit of being named,
+  and being more specific. C style casts may also perform differently than expected. Check the following table:
+    - C-Style Casts:
+      - "(<type>) <var/literal>"
+      - "<type>(<var.literal>)"
+    - C++-Style Casts (In order of what the C-style casts try):
+      - "const_cast<<type>>(<var/literal>)"
+      - "static_cast<<type>>(<var/literal>)"
+      - "reinterpret_cast<<type>>(<var/literal>)"
+      - "dynamic_cast<<type>>(<var/literal>)"
+
+- Implicit type conversion is done by the compiler without instruction from the programmer.
+
+- Aliases can be created with the "using" keyword i.e. "using <new_key> = <old_key>;". They can also be included with a header file, as they will be declared
+  in the global namespace of all ".cpp" files that include the header file. This is useful for shortening long type names.
+
+- Functions with parameters may have default arguments for any or all of the parameters. The argument MUST be defined with the copy operator "=", direct-list
+  initialization and others won't work. When multiple arguments default and the function call passes
+  some arguments, but leaves others as default, it will take them left to right. I.e. "void func(int x = 1, int y = 2, int z = 3)" will take arguments from
+  a call like "func()" and make it the same as "func(1, 2, 3)", make "func(4)" like "func(4, 2, 3)", "func(4, 5)" like "func(4, 5, 3)" etc. Find an example
+  in "./Assorted/defaultArguments.cpp". Default arguments must be the rightmost in the arguments. Defualt arguments should, if possible, be only placed
+  in the forward declaration, not the definition.
+
+- Templates are a functionality in C++ for creating reusable functions that can take multiple different types for a single parameter. Template functions
+  can also use default parameters. Certain input types can be deleted with the "= delete;" suffix, replacing all type placeholders with whatever should
+  not be allowed. Local static keywords will not keep their value between different type implementations of the template. This is because the compiler
+  makes different functions for the template when they are required.
