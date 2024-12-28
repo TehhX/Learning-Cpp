@@ -1,12 +1,14 @@
+Examples for all concepts and points either in "./Assorted/", or a seperate folder if they have multiple files. C++17 or later assumed.
+
+---------------------------------------------------------------------------------------------------------------------------------------------
+
 - Use direct-list initialization: int x { value }; for various reasons including:
-  - Value Must be of type int (or whatever the data type is), or compiler will give an error (Easier to bug-fix)
-    i.e. int x {4.5} will give an error, 4.5 is not an integer
-  - Is the current/modern standard
+  - Value Must be of the given type, or compiler will give an error i.e. int x {4.5} will give an error, 4.5 is not an integer
   - Does not involve copying data, more effecient
   - Value initialization is of same format, i.e. x = {}; will set x to 0, thus easier to remember
-    
-- Can use extraction/insertion operators more than once
-  - i.e. cin >> x >> y >> z; will take values seperated by spaces and put them into x, then y, then z.
+
+- Can use extraction/insertion operators more than once, i.e. cin >> x >> y >> z; will take values seperated by whitespace and put them
+  into x, then y, then z.
 
 - Declared variables are not initialized to any default values (unlike Java). int x; will not assing value 0 to x, x will be unassigned.
 
@@ -14,31 +16,25 @@
 
 - Main function always returns 0 implicitly (excluding error occurances obviously), so there is no need to put return 0; at the end.
 
-- Can place a function below main() so long as you use forward declaration. For the function int add(int x, int y) {...}, just declare it before
-  main as int add(int, int); so that main can call the actual function below it. No parameter names are required in the declaration, just types.
-  However, naming them anyway is best practice. Use of forward declarations:
+- Forward declarartions can be used for many things, by simply writing "<type> func(<type>, {etc.});" without the definition.
   - Circular-referencing functions. If two functions call each other, it is impossible to bring both of them behind the other, given the
     restrictions of spacetime.
   - Functions of other files. One cannot reorder the functions behind main when they exist in seperate files.
   - To help better organize code. If one wants to group functions, or sort them in a specific manner, forward declaration may be used.
 
-- Dont use 'using namespace', specifically declare what namespace you mean at execution (i.e. std::cout)
+- Dont use 'using namespace', specifically declare what namespace you mean line-by-line i.e. std::cout
 
-- Macros can be used with the preprocessor. #define CAT DOG will replace all instances of CAT with DOG. It is unsafe, and reccomended against.
+- Macros can be used with the preprocessor. #define CAT DOG will replace all instances of CAT with DOG. It is unsafe, and reccomended agains
 
-- Macros CAN however be safely used for things shown in https://www.learncpp.com/cpp-tutorial/introduction-to-the-preprocessor/
-
-- Header files (example.h) can be used to insert many common lines of code or forward declarations into the start of a .cpp file with the
-  #include preprocessor directive. As for forward declarations, write them just the same as you would in the .cpp file. An example of this
-  and multi-file organization in general can be found in /MultiFile. The files within can be compiled and linked by typing either
-  "g++ fileOne.cpp fileTwo.cpp -0 MultiFile.<exe/out>" or "g++ *.cpp -o MultiFile.<exe/out>. The former only compiles and links
-  listed files, while the latter compiles and links all .cpp files in the directory. Both outputs will be named MultiFile.<exe/out>
+- Header files (example.h) can be used to insert many common pieces of code into multiple .cpp files such as:
+  - Forward declarations
+  - Common standard libraries
+  - Templates
+  - Global variable and function definitions
 
 - Header files should also be included in their paired .cpp files, to stop simple errors from occuring. In MultiFile, this means it should
-not only be included in fileOne.cpp, but also fileTwo.cpp.
-
-- Using #include <x> will tell the preprocessor to check the include directories for a file we did not write. Using "x" will check\
-  right next to the .cpp/.h files for a file we DID write.
+  not only be included in fileOne.cpp, but also fileTwo.cpp. If function types from forward declaration to definition are mismatched, the
+  compiler will only complain if this practice is followed.
 
 - Header sorting should be as such:
   - Paired header (in add.cpp, #include "add.h")
@@ -47,111 +43,82 @@ not only be included in fileOne.cpp, but also fileTwo.cpp.
   - Standard library headers: (in x.cpp, #include <iostream>)
 
 - Header File Best Practices:
-  - Always include header guards
-  - Do not define variables/functions (for now)
+  - Always #pragma once
   - Paried .cpp and .h files should be named the same i.e. x.cpp and x.h
   - Do not include .cpp files
 
-- Header guards help to stop duplicate declaration and initialization of functions and/or varaibles etc. They are simple to implement, just add
-  a #define at the start of header files with a unique name. The name, by standard convention, is the name of the header file in all uppercase
-  with underscores between words, and an H at the end. i.e. for a file named headerFile.h, use the definition #define HEADER_FILE_H. For the guard itself,
-  use the following (for a file named headerFile.h):
-    #ifndef HEADER_FILE_H
-    #define HEADER_FILE_H
-    // The header file itself, such as forward declarations, other includes, etc.
-    #endif
-  The code between #ifndef and #endif will only run if HEADER_FILE_H has not yet been defined. HEADER_FILE_H will be defined inside. This makes sure that
-  the ODR (One Definition Rule) is not left unfollowed, and certain compile/runtime errors are not made. "#pragma once" also works in place of a traditional
-  header guard in modern compilers, and is what most use (other than the old-heads at Google):
-    #pragma once
-    // The header file itself, such as forward declarations, other includes, etc.
+- Defining certain macros can make certain lines of code not compile with #ifdef for various purposes. Find an example
+  in "./Assorted/debugDefinition.cpp".
 
-- One can debug programs by adding the debugging lines of code, whatever they may be, and then only passing them through the preprocessor if a certain term is
-  defined. For example, if one wants to only print out a line of code Line(); when debugging, one can place #ifdef ENABLE_DEBUG before, and #endif after. Then,
-  these lines will only be passed through and compiled when the uncommented line of code #define ENABLE_DEBUG is present at the top of the file. This allows the
-  inclusion and exclusion of certain lines of code, in this case debugging code, to only be compiled when that first line of code, #define ENABLE_DEBUG is present.
-  Example (std::cerr... will only be compiled if #define ENABLE_DEBUG is present and NOT commented out): 
+- Refactoring is the act of changing the code of a program without changing its behavior
 
-    #define ENABLE_DEBUG // comment out to disable debugging
+- Numbers are signed by default (use the first bit to define positive/negative), but can be unsigned by using the keyword
+  i.e. unsigned int x {5};
 
-    int getUserInput() {
-      #ifdef ENABLE_DEBUG
-      std::cerr << "getUserInput() called\n";
-      #endif
+- The standard library allows fixed-width integers (Must "#include <cstdint>" All have "std::" prefix) Value ranges:
+    - int8_t  = 1 byte signed    =                       -128 -> 127
+    - uint8_t = 1 byte unsigned  =                          0 -> 255
 
-      std::cout << "Enter a number: ";
-      int x{};
-      std::cin >> x;
-      return x;
-    }
+    - int16_t  = 2 byte signed   =                    -32,768 -> 32,767
+    - uint16_t = 2 byte unsigned =                          0 -> 65,535
 
- - Using a logger is also a possibility, like using <plog>. After initialization in main() via "plog::init(plog::debug, "Logfile.txt");" It will document any output by
-   way of using "PLOGD << <output-string>;, i.e. "PLOGD << "Function Called";" NOTE: PLOG IS NOT INSTALLED BY DEFAULT, MUST BE DOWNLOADED FROM WEBSITE AND PLACED
-   WITHIN INCLUDE FOLDERS! IT IS ALSO NOT THE ONLY LOGGER THAT EXISTS!
+    - int32_t  = 4 byte signed   =             -2,147,483,648 -> 2,147,483,647
+    - uint32_t = 4 byte unsigned =                          0 -> 4,294,967,295
 
- - Using an integrated debugger is also an option, like the one in VS Code. I skipped many chapters on integrated debuggers, go back to 3.xx to reread later
-   if it becomes pertinent.
-
- - Refactoring is the act of changing the code of a program without changing its behavior
-
- - Numbers are signed by default (use the first bit to define positive/negative), but can be unsigned by using the keyword i.e. unsigned int x {5};
-
- - The standard library allows fixed-width integers (Must "#include <cstdint>" All have "std::" prefix) (Value range shown: "min -> max"):
-      int8_t  = 1 byte signed    = -128 -> 127
-      uint8_t = 1 byte unsigned  = 0 -> 255
-
-      int16_t  = 2 byte signed   = -32,768 -> 32,767
-      uint16_t = 2 byte unsigned = 0 -> 65,535
-
-      int32_t  = 4 byte signed   = -2,147,483,648 -> 2,147,483,647
-      uint32_t = 4 byte unsigned = 0 -> 4,294,967,295
-
-      int64_t  = 8 byte signed   = -9,223,372,036,854,775,808 -> 9,223,372,036,854,775,807
-      uint64_t = 8 byte unsigned = 0 -> 18,446,744,073,709,551,615
+    - int64_t  = 8 byte signed   = -9,223,372,036,854,775,808 ->  9,223,372,036,854,775,807
+    - uint64_t = 8 byte unsigned =                          0 -> 18,446,744,073,709,551,615
 
 - Append 'f' to a number to ensure it is of float type instead of the implied double i.e. "5.0" is a double, "5.0f" is a float.
 
-- Use "#include <iomanip>" and "std::cout << std::setprecision(int);" where int is the digits of precision for all future instances of "std::cout << <content>".
-  Using more precision than is allowed by a data type will result in strange digits after the actual precision ends.
+- Use "#include <iomanip>" and "std::cout << std::setprecision(int);" where int is the digits of precision for all future
+  instances of "std::cout << <content>". Using more precision than is allowed by a data type will result in undefined digits
+  after the actual precision ends.
 
-- Booleans will be printed by default as 1's and 0's, but the following command "std::cout << std::boolalpha;" will ensure all printing that occurs
-  after will be printed as true's and false's. "std::cout << std::noboolalpha;" can be inversely used to revert back to 1's and 0's.
+- Booleans will be printed by default as 1's and 0's, but the following command "std::cout << std::boolalpha;" will ensure all printing that
+  occurs after will be printed as true's and false's. "std::cout << std::noboolalpha;" can be inversely used to revert back to 1's and 0's.
 
-- When entering a boolean value by way of "std::cin >> <boolean>;", it must be entered as 0's or 1's, any other value (inluding words like true or false)
-  will default to false (or 0). This can be changed by the statement: "std::cin >> std::boolalpha;", which will allow (case-sensitive) "true" or "false" as input.
-  However, it will NO LONGER accept 0's or 1's as input.
+- When entering a boolean value by way of "std::cin >> <boolean>;", it must be entered as 0's or 1's, any other value (inluding words like
+  true or false) will default to false (or 0). This can be changed by the statement: "std::cin >> std::boolalpha;", which will allow
+  (case-sensitive) "true" or "false" as input. However, it will NO LONGER accept 0's or 1's as input.
 
-- If the program expects a boolean (i.e. if (<boolean>) doThis();), an integer can be entered instead, where all non-zero values will be true, and 0 will be false.
+- If the program expects a boolean (i.e. if (<boolean>) doThis();), an integer can be entered instead, where all non-zero values will be
+  true, and 0 will be false.
 
-- Explicit static casting can be done as such: "static_cast<type>(expression)" i.e. "static_cast<int>(5.5)" will cast the double "5.5" to an integer "5".
+- Explicit static casting can be done as such: "static_cast<type>(expression)" i.e. "static_cast<int>(5.5)" will cast the double "5.5"
+  to an integer "5".
 
-- Defining a constant variable goes as such: "const int {50};". The const should always go to the left of the type by convention. Varaibles that won't be changed
-  should, where possible, be set as constant. This removes the potential for error in regards to the variable, lets the compiler optimize the code now that it knows
-  the variable won't change, and reduces the complexity of a program.
+- Defining a constant variable goes as such: "const int {50};". The const should always go to the left of the type by convention.
+  Varaibles that won't be changed should be made constant. This removes the potential for error in regards to the variable, lets the
+  compiler optimize the code now that it knows the variable won't change, and reduces the complexity of a program.
 
-- Defining a constant variable can also be done with "constexpr". This will generate a compile-time error if it is not actually constant, as well as whatever
-  it is being defined as being constant itself. Whenever you can use "constexpr" over "const", do. For some cases however, "const" is the only/better choice.
+- Defining a constant variable can also be done with "constexpr". This will generate a compile-time error if it is not actually constant,
+  as well as whatever it is being defined as being constant itself. Whenever you can use "constexpr" over "const", do. For some cases
+  however, "const" is the only/better choice.
 
-- Literals are values inserted directly into code, without names. In the following definition "int x {5}", x is NOT a literal, as it is a variable. The '5' is
-  is assigned to IS a literal, as it is an unnamed value. X has the name x, so it is not literal.
+- Literals are values inserted directly into code, without names. In the following definition "int x {5}", x is NOT a literal, as it is a
+  variable. The '5' is is assigned to IS a literal, as it is an unnamed value. X has the name x, so it is not literal.
 
-- One may have the following issue: "float x { 1.6 };" gives an error, as "1.6" is seen as a literal of type double. One can either change x from type
-  float to type double, ergo "double x { 1.6 };", or change the input to a float, "float x { 1.6f };".
+- One may have the following issue: "float x { 1.6 };" gives an error, as "1.6" is seen as a literal of type double. One can either change
+  x from type float to type double, ergo "double x { 1.6 };", or change the input to a float, "float x { 1.6f };".
 
-- Writing in scientific notation is allowed by way of using exponents. Writing 1,000,000 can also be done as 1e+6 or 1e6. 0.000001 can also be written as 1e-6.
+- Writing in scientific notation is allowed by way of using exponents. Writing 1,000,000 can also be done as 1e+6 or 1e6. 0.000001 can
+  also be written as 1e-6.
 
-- Other bases can be used. Writing in octal can be done by writing a zero before the octal i.e. 012 will be equal to 10. Writing in hexadecimal can be done
-  with the prefix "0x" instead of '0'. i.e. 0xFFF is equal to 4095 decimal. Binary numbers can be written by the prefix "0b". i.e. 0b1111 = 15. (Only after C++14)
+- Other bases can be used. Writing in octal can be done by writing a zero before the octal i.e. 012 will be equal to 10. Writing in
+  hexadecimal can be done with the prefix "0x" instead of '0'. i.e. 0xFFF is equal to 4095 decimal. Binary numbers can be written by the
+  prefix "0b". i.e. 0b1111 = 15.
 
-- Using C-style strings is dangerous, and may sometimes produce undefined behavior. Using "std::string" of "#include <string>" is prefered in cases where the string
-  itelf is not literal. It allows string lengths to be changed, new values to be copied over, and is safer in general. However, things change when asking for input.
-  "std::cin" will break operation on whitespace, potentially breaking a program. In this case, "std::getline()" is preferable. There are arguments that must be
-  passed however. If one is trying to pass the input to a "std::string"-style string with variable name "name", write the following:
-  std::getline(std::cin >> std::ws, name). This passes the input as the first, and the variable to copy data to as the second. This will take the whole line, and
-  work as expected, just like before with the C-style string. The first argument technically only needs the "std::cin", but one may add the ">> std::ws" to
-  specify that leading whitespace should be removed. i.e. "    x" -> "x", but "x   " does not change (whitespace is not leading).
+- Using C-style strings is dangerous, and may sometimes produce undefined behavior. Using "std::string" of "#include <string>" is prefered
+  in cases where the string itelf is not literal. It allows string lengths to be changed, new values to be copied over, and is safer in
+  general. However, things change when asking for input. "std::cin" will break operation on whitespace, potentially breaking a program.
+  In this case, "std::getline()" is preferable. There are arguments that must be passed however. If one is trying to pass the input to a
+  "std::string"-style string with variable name "name", write "std::getline(std::cin >> std::ws, name)". This passes the input as the first,
+  and the variable to copy data to as the second. This will take the whole line, and work as expected, just like before with the C-style
+  string. The first argument technically only needs the "std::cin", but one may add the ">> std::ws" to specify that leading whitespace
+  should be removed. i.e. "    x" -> "x", but "x   " does not change (whitespace is not leading).
 
-- Add an 's' after a string literal to change it to a std::string literal. i.e. <"Hello"> is a C-Style literal, <"Hello"s> is an std::string style literal.
+- Add an 's' after a string literal to change it to a std::string literal. i.e. <"Hello"> is a C-Style literal, <"Hello"s> is an std::string
+  style literal.
 
 - One can use std::string_view to create a read-only version of a string literal.
 
@@ -164,15 +131,15 @@ not only be included in fileOne.cpp, but also fileTwo.cpp.
     }
   Namespaces should have every first letter be capitalized i.e. "Namespace" instead of "namespace"
 
-- Functions and variables in namespaces must be called with either a scope resolution operator i.e. for a function named "doSomething()" in namespace "Example" one
-  would call "doSomething()" by using "Example::doSomething()". If it is being called from within the same namespace, the operator is not required. But if the callee
-  is in the global namespace and one tries calling it from within a namespace, the global scope can be ensured by using the scope resolution operator without a prefix,
-  i.e. global function "doSomething()" can be called from namespace "Example" using the statement "::doSomething()". Without a namespace specified, it means the global
-  scope.
+- Functions and variables in namespaces must be called with either a scope resolution operator i.e. for a function named "doSomething()"
+  in namespace "Example" one would call "doSomething()" by using "Example::doSomething()". If it is being called from within the same
+  namespace, the operator is not required. But if the callee is in the global namespace and one tries calling it from within a namespace,
+  the global scope can be ensured by using the scope resolution operator without a prefix, i.e. global function "doSomething()" can be called
+  from namespace "Example" using the statement "::doSomething()". Without a namespace specified, it means the global scope.
 
-- Forward declarations in header files also need to be in the same namespace as their corrosponding definition. i.e. for function "ExampleNamespace::doSomething()"
-  declared in "foo.cpp", if one wants to call it from "bar.cpp" with a header file, the namespace "ExampleNamespace" has to be used in the header file. Find an actual
-  example in Learning-Cpp/NamespaceHeader.
+- Forward declarations in header files also need to be in the same namespace as their corrosponding definition. i.e. for function
+  "ExampleNamespace::doSomething()" declared in "foo.cpp", if one wants to call it from "bar.cpp" with a header file, the namespace
+  "ExampleNamespace" has to be used in the header file. Find an actual example in Learning-Cpp/NamespaceHeader.
 
 - The same namespace can be declared across multiple files, and all within will be considered of the same namespace.
 
@@ -237,38 +204,41 @@ not only be included in fileOne.cpp, but also fileTwo.cpp.
   maximum. Multiple different distributors can be used with the same RNG. An example of an RNG can be found in "./Assorted/randomNumber.cpp".
 
 - Assertive statements with "#include <cassert>" can detect problems and end the program. Regular assertions i.e. "assert(<true_thing>);" can become more descriptive,
-  i.e. "assert(<true_thing> && <string>);" will print to the console what was false, and the string passed to it. This helps with error logging.
-  However, asserts should not be used in production code, only to help with debugging. 
+  i.e. "assert(<true_thing> && <string>);" will print to the console what was false, and the string passed to it. This helps with error logging. However, asserts
+  should not be used in production code, only to help with debugging. 
 
 - Static assertive statements can be used to evaluate code at compile time, without needing an "#include" header. "static_assert(<true_thing>, <string_literal>);".
+  It requires a constexpr as the <true_thing> however.
 
 - There are multiple different explicit ways to cast a variable or literal. These include C and C++ style casts. C++ style casts have the benefit of being named,
   and being more specific. C style casts may also perform differently than expected. Check the following table:
     - C-Style Casts:
       - "(<type>) <var/literal>"
       - "<type>(<var.literal>)"
-    - C++-Style Casts (In order of what the C-style casts try):
+    - C++-Style Casts (In order of what the C-style cast tries to do):
       - "const_cast<<type>>(<var/literal>)"
       - "static_cast<<type>>(<var/literal>)"
       - "reinterpret_cast<<type>>(<var/literal>)"
-      - "dynamic_cast<<type>>(<var/literal>)"
-
+      - "dynamic_cast<<type>>(<var/literal>)" (C-Style cast does not try to dynamic_cast at any point)
+      
 - Implicit type conversion is done by the compiler without instruction from the programmer.
 
 - Aliases can be created with the "using" keyword i.e. "using <new_key> = <old_key>;". They can also be included with a header file, as they will be declared
   in the global namespace of all ".cpp" files that include the header file. This is useful for shortening long type names.
 
-- Functions with parameters may have default arguments for any or all of the parameters. The argument MUST be defined with the copy operator "=", direct-list
-  initialization and others won't work. When multiple arguments default and the function call passes
-  some arguments, but leaves others as default, it will take them left to right. I.e. "void func(int x = 1, int y = 2, int z = 3)" will take arguments from
-  a call like "func()" and make it the same as "func(1, 2, 3)", make "func(4)" like "func(4, 2, 3)", "func(4, 5)" like "func(4, 5, 3)" etc. Find an example
-  in "./Assorted/defaultArguments.cpp". Default arguments must be the rightmost in the arguments. Defualt arguments should, if possible, be only placed
-  in the forward declaration, not the definition.
+- Functions with parameters may have default arguments for any or all of the parameters.
+  - The argument MUST be defined with the copy operator "=", direct-list initialization and others won't work.
+  - When multiple arguments default and the function call passes some arguments but leaves others as default, it will take them left to right.
+    I.e. "void func(int x = 1, int y = 2, int z = 3)" will take arguments from a call like "func()" and make it the same as "func(1, 2, 3)", make "func(4)"
+    like "func(4, 2, 3)", "func(4, 5)" like "func(4, 5, 3)" etc.
+  - Defualt arguments should, if possible, be only placed in the forward declaration, not the definition.
 
-- Templates are a functionality in C++ for creating reusable functions that can take multiple different types for a single parameter. Template functions
-  can also use default parameters. Certain input types can be deleted with the "= delete;" suffix, replacing all type placeholders with whatever should
-  not be allowed. Local static keywords will not keep their value between different type implementations of the template. This is because the compiler
-  makes different functions for the template when they are required.
+- Templates are a functionality in C++ for creating reusable functions that can take multiple different types for a single parameter.
+  - Certain input types can be deleted with the "= delete;" suffix, replacing all type placeholders with whatever should not be allowed.
+  - Local static keywords will not keep their value between different type implementations of the template. This is because the compiler makes different
+    functions for the template when they are required, and they initialize different variables.
+  - Templates can have multiple wildcard types. When returning a value from multiple types, the auto keyword can be useful. It will deduce the correct return
+    type, and return it as such.
+  - Template definitions in header files don't need the inline keyword as regular functions do.
 
-- Templates can have multiple wildcard types. When returning a value from multiple types, the auto keyword can be useful. It will deduce the correct return
-  type, and return it as such.
+- When compiling multiple files, start with the .cpp file that has the main function in it, or else the compiler will throw an error.
