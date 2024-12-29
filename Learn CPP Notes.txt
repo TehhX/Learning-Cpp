@@ -1,6 +1,6 @@
-Examples for all concepts and points either in "./Assorted/", or a seperate folder if they have multiple files. C++17 or later assumed.
+Examples for all concepts and points either in "./Assorted/", or a seperate folder if they have multiple files. >= C++17 assumed.
 
----------------------------------------------------------------------------------------------------------------------------------------------
+-------------------------------------------------------------------------------------------------------------------------------------------------
 
 - Use direct-list initialization: int x { value }; for various reasons including:
   - Value Must be of the given type, or compiler will give an error i.e. int x {4.5} will give an error, 4.5 is not an integer
@@ -143,35 +143,39 @@ Examples for all concepts and points either in "./Assorted/", or a seperate fold
 
 - The same namespace can be declared across multiple files, and all within will be considered of the same namespace.
 
-- Namespaces can also be declared within other namespaces. i.e. for a parent namespace "Foo", child namespace "Bar", and function in namespace "Bar" named
-  "doSomething()", in the global namespace or a completley seperate namespace, the function would be called as "Foo::Bar::doSomething()".
+- Namespaces can also be declared within other namespaces. i.e. for a parent namespace "Foo", child namespace "Bar", and function in namespace
+  "Bar" named "doSomething()", in the global namespace or a completley seperate namespace, the function would be called as
+  "Foo::Bar::doSomething()".
 
-- Namespace aliases can be used to shorten the calling of certain namespaces. i.e. for the same example as before, using "namespace FoobarShortened = Foo::Bar;". from
-  then on, "Foo:Bar::doSomething()" can be called as "FoobarShortened::doSomething()". Obviously, this actually lengthens the scope resolution, but if we name it
-  something else, it would be more concise.
+- Namespace aliases can be used to shorten the calling of certain namespaces. i.e. for the same example as before, using
+  "namespace FoobarShortened = Foo::Bar;". from then on, "Foo:Bar::doSomething()" can be called as "FoobarShortened::doSomething()". Obviously,
+  this actually lengthens the scope resolution, but if we name it something shorter it can be made more concise.
 
 - "std::swap" can be used with "#include <utility>". If one wants to swap variables 'x' and 'y', do: "std::swap(x, y);".
 
-- The "static" keyword can be used to make variables and functions only link within the file it is in, no other files can use it. Constexpr variables are static by default,
-  but can be made usable with other files by the "extern" keyword. Integers without the "constexpr" are external by default, and can be made static. Static variables and
-  functions use internal linkage, and extern(al) variables/functions use external linkage.
+- The "static" keyword can be used to make variables and functions only link within the file it is in, no other files can use it. Constexpr
+  variables are static by default, but can be made usable with other files by the "extern" keyword. Integers without the "constexpr" are
+  external by default, and can be made static. Static variables and functions use internal linkage, and extern(al) variables/functions use
+  external linkage.
 
-- The "inline" keyword can be used when defining variables or functions in header files. This keyword will allow multiple definitions of the same variable/function being
-  included and duplicated into multiple .cpp files, so long as they are all identical. The compiler/linker will also remove duplicates at compile time.
+- The "inline" keyword can be used when defining variables or functions in header files. This keyword will allow multiple definitions of the same
+  variable/function being included and duplicated into multiple .cpp files, so long as they are all identical. The compiler/linker will also
+  remove duplicates at compile time.
 
 - Find examples of declaring/defining/initializing variables and functions in header files within Learning-Cpp/HeaderConstants
 
 - The many static keyword definitions:
-  - Static Duration: Variables that are created on program start, and destroyed on program exit. For example, global variables have a static duration.
+  - Static Duration: Variables that are created on program start, and destroyed on program exit. For example, global variables have a static
+    duration.
   - Global variables with a static prefix are made internally linked.
-  - Local variables with the static prefix will be created at the start of the program, and destroyed at program exit. This is just like how un-prefixed global variables
-    work. However, these local variables will only be initialized once, so as to avoid errors. An example can be found at "Learning-Cpp/Assorted/staticVariables.cpp".
-    These static-local variables can be used to generate a new copy of an integer/other type every function call, while keeping track of what increment the variable
-    should be.
+  - Local variables with the static prefix will be created at the start of the program, and destroyed at program exit. This is just like how
+    un-prefixed global variables work. However, these local variables will only be initialized once, so as to avoid errors. An example can be
+    found at "Learning-Cpp/Assorted/staticVariables.cpp". These static-local variables can be used to generate a new copy of an integer/other
+    type every function call, while keeping track of what increment the variable should be.
 
-- Constexpr if statements can be used if constexpr variables defined before are a part of the condition. "./Assorted/constexprIf.cpp" is an example.
+- Constexpr if statements can be used if constexpr variables defined before are a part of the condition, see "./Assorted/constexprIf.cpp".
 
-- Don't indent switch statement cases:
+- Don't indent switch statement cases i.e.
     switch (value) {
     case x:
       doX();
@@ -183,35 +187,37 @@ Examples for all concepts and points either in "./Assorted/", or a seperate fold
       doDefault();
     }
 
-- The fallthrough statement can be used to indicate intentional fallthrough. Place "[[fallthrough]]" at the end of a case. Example in last point. It doesn't do anything
-  other than show that fallthrough is intentional, and potentially disable some compuler warnings, as the code will execute just the same without it.
+- The fallthrough statement can be used to indicate intentional fallthrough. Place "[[fallthrough]]" at the end of a case. Example in last
+  point. It doesn't do anything other than show that fallthrough is intentional, and potentially disable some compuler warnings, as the
+  code will execute just the same without it.
 
-- The "goto" keyword can jump to a particular part of the program by a label. An example can be found in "./Assorted/gotoBackwards.cpp". The goto label can also jump
-  forwards, found in "./Assorted/gotoForwards.cpp". Goto statements do not need to be declared by the time they're called, like variables and functions do. Goto
-  statements are generally unused, but may have some small and specific uses.
+- The "goto" keyword can jump to a particular part of the program by a label. An example can be found in "./Assorted/gotoBackwards.cpp".
+  The goto label can also jump forwards, found in "./Assorted/gotoForwards.cpp". Goto statements do not need to be declared by the time they're
+  called, like variables and functions do. Goto statements are generally unused, but have some niche uses.
 
 - Modulus usage example in "./Assorted/fizzBuzz.cpp".
 
-- The "continue" keyword can be used to break out of the current iteration of a loop statement, but continue to loop through it starting at the next index, or beginning.
-  This keyword is used similarly to the "break" keyword, but doesn't completley exit the loop.
+- The "continue" keyword can be used to break out of the current iteration of a loop statement, but continue to loop through it starting at
+  the next index, or beginning. This keyword is used similarly to the "break" keyword, but doesn't completely exit the loop.
 
-- A running program can be called before main() ends by using "#include <cstdlib> {...} std::exit();" Also, "std::atexit(<function>);" will call <function>,
-  and then exit the program as "std::exit();" does after <function> completes.
+- A running program can be called before main() ends by using "#include <cstdlib> {...} std::exit();" Also, "std::atexit(<function>);" will
+  call <function>, and then exit the program as "std::exit();" does after <function> completes.
 
-- Random numbers in C++ can be generated using multiple functions from "#include <random>". First, a random number for the seed needs to be picked or otherwidse generated.
-  A single random number can be taken from "std::random_device", and put into the Mersenne Twister algorithm. It should be input multiple times (8 minimum) to help seed
-  the MT algorithm. A uniform integer distributor can be used to distribute random numbers taken from this algorithm, and distribute the numbers between a minimum and
-  maximum. Multiple different distributors can be used with the same RNG. An example of an RNG can be found in "./Assorted/randomNumber.cpp".
+- Random numbers in C++ can be generated using multiple functions from "#include <random>". First, a random number for the seed needs to be
+  picked or otherwidse generated. A single random number can be taken from "std::random_device", and put into the Mersenne Twister algorithm.
+  It should be input multiple times (8 minimum) to help seed the MT algorithm. A uniform integer distributor can be used to distribute random
+  numbers taken from this algorithm, and distribute the numbers between a minimum and maximum. Multiple different distributors can be used with
+  the same RNG. An example of an RNG can be found in "./Assorted/randomNumber.cpp".
 
-- Assertive statements with "#include <cassert>" can detect problems and end the program. Regular assertions i.e. "assert(<true_thing>);" can become more descriptive,
-  i.e. "assert(<true_thing> && <string>);" will print to the console what was false, and the string passed to it. This helps with error logging. However, asserts
-  should not be used in production code, only to help with debugging. 
+- Assertive statements with "#include <cassert>" can detect problems and end the program. Regular assertions i.e. "assert(<true_thing>);" can
+  become more descriptive, i.e. "assert(<true_thing> && <string>);" will print to the console what was false, and the string passed to it. This
+  helps with error logging. However, asserts should not be used in production code, only to help with debugging. 
 
-- Static assertive statements can be used to evaluate code at compile time, without needing an "#include" header. "static_assert(<true_thing>, <string_literal>);".
-  It requires a constexpr as the <true_thing> however.
+- Static assertive statements can be used to evaluate code at compile time, without needing an "#include" header.
+  "static_assert(<true_thing>, <string_literal>);". It requires a constexpr as the <true_thing> however.
 
-- There are multiple different explicit ways to cast a variable or literal. These include C and C++ style casts. C++ style casts have the benefit of being named,
-  and being more specific. C style casts may also perform differently than expected. Check the following table:
+- There are multiple different explicit ways to cast a variable or literal. These include C and C++ style casts. C++ style casts have the
+  benefit of being named, and being more specific. C style casts may also perform differently than expected. Check the following table:
     - C-Style Casts:
       - "(<type>) <var/literal>"
       - "<type>(<var.literal>)"
@@ -219,26 +225,22 @@ Examples for all concepts and points either in "./Assorted/", or a seperate fold
       - "const_cast<<type>>(<var/literal>)"
       - "static_cast<<type>>(<var/literal>)"
       - "reinterpret_cast<<type>>(<var/literal>)"
-      - "dynamic_cast<<type>>(<var/literal>)" (C-Style cast does not try to dynamic_cast at any point)
+      - "dynamic_cast<<type>>(<var/literal>)" (C-Style cast does not try to dynamic_cast at any point AFAIK)
       
 - Implicit type conversion is done by the compiler without instruction from the programmer.
 
-- Aliases can be created with the "using" keyword i.e. "using <new_key> = <old_key>;". They can also be included with a header file, as they will be declared
-  in the global namespace of all ".cpp" files that include the header file. This is useful for shortening long type names.
+- Aliases can be created with the "using" keyword i.e. "using <new_key> = <old_key>;". They can also be included with a header file, as they
+  will be declared in the global namespace of all ".cpp" files that include the header file. This is useful for shortening long type names.
 
-- Functions with parameters may have default arguments for any or all of the parameters.
-  - The argument MUST be defined with the copy operator "=", direct-list initialization and others won't work.
-  - When multiple arguments default and the function call passes some arguments but leaves others as default, it will take them left to right.
-    I.e. "void func(int x = 1, int y = 2, int z = 3)" will take arguments from a call like "func()" and make it the same as "func(1, 2, 3)", make "func(4)"
-    like "func(4, 2, 3)", "func(4, 5)" like "func(4, 5, 3)" etc.
-  - Defualt arguments should, if possible, be only placed in the forward declaration, not the definition.
+- Functions with parameters may have default arguments for any or all of the parameters. The argument MUST be defined with the copy operator
+  "=", direct-list initialization and others won't work. See "./Assorted/defaultArguments.cpp".
 
 - Templates are a functionality in C++ for creating reusable functions that can take multiple different types for a single parameter.
   - Certain input types can be deleted with the "= delete;" suffix, replacing all type placeholders with whatever should not be allowed.
-  - Local static keywords will not keep their value between different type implementations of the template. This is because the compiler makes different
-    functions for the template when they are required, and they initialize different variables.
-  - Templates can have multiple wildcard types. When returning a value from multiple types, the auto keyword can be useful. It will deduce the correct return
-    type, and return it as such.
+  - Local static keywords will not keep their value between different type implementations of the template. This is because the compiler makes
+    different functions for the template when they are required, and they initialize different variables.
+  - Templates can have multiple wildcard types. When returning a value from multiple types, the auto keyword can be useful. It will deduce the
+    correct type, and return it as such.
   - Template definitions in header files don't need the inline keyword as regular functions do.
 
 - When compiling multiple files, start with the .cpp file that has the main function in it, or else the compiler will throw an error.
