@@ -72,7 +72,8 @@ Examples for all concepts and points either in "./Assorted/", or a seperate fold
 
 - Use "#include <iomanip>" and "std::cout << std::setprecision(int);" where int is the digits of precision for all future
   instances of "std::cout << <content>". Using more precision than is allowed by a data type will result in undefined digits
-  after the actual precision ends.
+  after the actual precision ends. To have precision only affect post decimal digits, use "std::cout << std::fixed;" before
+  "setprecision".
 
 - Booleans will be printed by default as 1's and 0's, but the following command "std::cout << std::boolalpha;" will ensure all printing that
   occurs after will be printed as true's and false's. "std::cout << std::noboolalpha;" can be inversely used to revert back to 1's and 0's.
@@ -244,3 +245,8 @@ Examples for all concepts and points either in "./Assorted/", or a seperate fold
   - Template definitions in header files don't need the inline keyword as regular functions do.
 
 - When compiling multiple files, start with the .cpp file that has the main function in it, or else the compiler will throw an error.
+
+- Creating a constexpr variable requires the initializing variable to be a constant or literal itself. That means that functions aren't allowed
+  as the input. This is where constexpr functions come into play. Find an example of its usage in "./Assorted/constexprFunc.cpp".
+
+- 
