@@ -248,5 +248,3 @@ Examples for all concepts and points either in "./Assorted/", or a seperate fold
 
 - Creating a constexpr variable requires the initializing variable to be a constant or literal itself. That means that functions aren't allowed
   as the input. This is where constexpr functions come into play. Find an example of its usage in "./Assorted/constexprFunc.cpp".
-
-- 
