@@ -305,3 +305,22 @@ Not everything stated is true 100% of the time, this is from the general experie
   and that any "== nullptr" pointer is null (obviously).
 
 - Older code might use outdated ways of assigning a pointer to null i.e. "T* x {0}", "T* x {NULL};" instead of the modern "T* x {nullptr};"
+
+- Pointers of a non const type cannot point at a const type. The type of a pointer must be made const to point at a const type. This means
+  that the pointer cannot modify the const variable. Pointers of a const type i.e. "const int" can point at a non const variable i.e "int".
+  The pointer, however, still cannot modify the variable it points at, whether the variable is const or not. Example in
+  "./Assorted/constPointers.cpp".
+
+- Pointers themselves, not the type they point at, can also be const. This changes it so that the pointer cannot be reseated. However, a
+  const pointer can still be dereferenced to change the value at the address. This means that the only thing that is different about
+  const pointers is the fact that they cannot change what they are pointing at.
+
+- Note the difference between a pointer to a constant type and a constant pointer to a type, both in how they work and how their syntax
+  differ from one another.
+
+- Another way to pass through a parameter is by address (in addition to value and reference from before). Example in 
+  "./Assorted/passByAddress.cpp"
+
+- Prefer pass by reference to pass by address when possible. Avoids null-pointer errors. If using pass by address, place "assert(ptr)"
+  at the start of the function to make sure the program says when a null-pointer is accidentally passed. There are scenarios when a
+  null pointer is acceptable/wanted when assert shouldn't be used.
