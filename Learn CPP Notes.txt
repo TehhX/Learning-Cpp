@@ -248,3 +248,38 @@ Examples for all concepts and points either in "./Assorted/", or a seperate fold
 
 - Creating a constexpr variable requires the initializing variable to be a constant or literal itself. That means that functions aren't allowed
   as the input. This is where constexpr functions come into play. Find an example of its usage in "./Assorted/constexprFunc.cpp".
+
+- LValue references can be used to reference an existing variable and make somewhat of an alias of it. Reference variables MUST be initialized
+  on declaration, it cannot be left null. Find an example in "./Assorted/lvalueRef.cpp".
+
+- LValue references cannot initialize and reference to:
+  - Const vars, when the reference itself is not also const
+  - RValues, like Literals
+
+- LValues cannot be changed to reference another value or variable. Example in same file as before.
+
+- References and the variables they're referencing have independent life times. References becoming deleted before their accompanying originals
+  can occur in certain circumstances, but the original is not impacted. However, the original becoming deleted before the reference does impact
+  the reference, leading to undefined behavior. This is called a dangling reference.
+
+- References are not objects, and will be replaced by their referent at compile time where possible.
+
+- References can be made constant when their originals are mutable, and the program will still work as expected. However, references cannot
+  edit the original, so this makes things a bit safer. Editing the original will change the reference, even if the reference is const.
+
+- Constexpr references need either a global variable, or a local static variable.
+
+- Passing by value and passing by reference are two different things. They both refer to arguments inserted into function parameters, however
+  what they pass are different. When passing by value, the object argument is copied onto the parameter in the function, and the function runs.
+  This is fine for primitive types, but for classes and more expensive types, passing by reference is cheaper to run. Find an example in
+  "./Assorted/passByRef.cpp".
+
+- Passing by value also differs to reference in terms of what can be edited in the function. Passing by value allows one to edit a copy
+  of the passed value or class object etc, leaving the original intact. While this is desirable a lot of the time, passing by reference
+  alows the original to be directly edited, which is just as useful. Same place for example.
+
+- When passing a const by reference, the parameter must also be const. Same place again for example.
+
+- An object is cheap to copy if it uses the size of <= 2 memory addresses.
+
+- "std::string_view" is cheaper to copy and easier to work with than "const std::string&" in parameters.
