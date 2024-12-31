@@ -1,4 +1,6 @@
 Examples for all concepts and points either in "./Assorted/", or a seperate folder if they have multiple files. >= C++17 assumed.
+Not everything stated is true 100% of the time, this is from the general experience of someone new to the language learning from
+"learncpp.com". No consistency is guaranteed :^)
 
 -------------------------------------------------------------------------------------------------------------------------------------------------
 
@@ -16,7 +18,7 @@ Examples for all concepts and points either in "./Assorted/", or a seperate fold
 
 - Main function always returns 0 implicitly (excluding error occurances obviously), so there is no need to put return 0; at the end.
 
-- Forward declarartions can be used for many things, by simply writing "<type> func(<type>, {etc.});" without the definition.
+- Forward declarartions can be used for many things, by simply writing "T func(T, {etc.});" without the definition.
   - Circular-referencing functions. If two functions call each other, it is impossible to bring both of them behind the other, given the
     restrictions of spacetime.
   - Functions of other files. One cannot reorder the functions behind main when they exist in seperate files.
@@ -71,21 +73,21 @@ Examples for all concepts and points either in "./Assorted/", or a seperate fold
 - Append 'f' to a number to ensure it is of float type instead of the implied double i.e. "5.0" is a double, "5.0f" is a float.
 
 - Use "#include <iomanip>" and "std::cout << std::setprecision(int);" where int is the digits of precision for all future
-  instances of "std::cout << <content>". Using more precision than is allowed by a data type will result in undefined digits
+  instances of "std::cout << {...}". Using more precision than is allowed by a data type will result in undefined digits
   after the actual precision ends. To have precision only affect post decimal digits, use "std::cout << std::fixed;" before
   "setprecision".
 
 - Booleans will be printed by default as 1's and 0's, but the following command "std::cout << std::boolalpha;" will ensure all printing that
   occurs after will be printed as true's and false's. "std::cout << std::noboolalpha;" can be inversely used to revert back to 1's and 0's.
 
-- When entering a boolean value by way of "std::cin >> <boolean>;", it must be entered as 0's or 1's, any other value (inluding words like
+- When entering a boolean value by way of "std::cin >> bool;", it must be entered as 0's or 1's, any other value (inluding words like
   true or false) will default to false (or 0). This can be changed by the statement: "std::cin >> std::boolalpha;", which will allow
   (case-sensitive) "true" or "false" as input. However, it will NO LONGER accept 0's or 1's as input.
 
-- If the program expects a boolean (i.e. if (<boolean>) doThis();), an integer can be entered instead, where all non-zero values will be
+- If the program expects a boolean (i.e. if (bool) doThis();), an integer can be entered instead, where all non-zero values will be
   true, and 0 will be false.
 
-- Explicit static casting can be done as such: "static_cast<type>(expression)" i.e. "static_cast<int>(5.5)" will cast the double "5.5"
+- Explicit static casting can be done as such: "static_cast<T>(expression)" i.e. "static_cast<int>(5.5)" will cast the double "5.5"
   to an integer "5".
 
 - Defining a constant variable goes as such: "const int {50};". The const should always go to the left of the type by convention.
@@ -201,8 +203,8 @@ Examples for all concepts and points either in "./Assorted/", or a seperate fold
 - The "continue" keyword can be used to break out of the current iteration of a loop statement, but continue to loop through it starting at
   the next index, or beginning. This keyword is used similarly to the "break" keyword, but doesn't completely exit the loop.
 
-- A running program can be called before main() ends by using "#include <cstdlib> {...} std::exit();" Also, "std::atexit(<function>);" will
-  call <function>, and then exit the program as "std::exit();" does after <function> completes.
+- A running program can be called before main() ends by using "#include <cstdlib> {...} std::exit();" Also, "std::atexit(func);" will
+  call "func", and then exit the program as "std::exit();" does after "func" completes.
 
 - Random numbers in C++ can be generated using multiple functions from "#include <random>". First, a random number for the seed needs to be
   picked or otherwidse generated. A single random number can be taken from "std::random_device", and put into the Mersenne Twister algorithm.
@@ -211,22 +213,22 @@ Examples for all concepts and points either in "./Assorted/", or a seperate fold
   the same RNG. An example of an RNG can be found in "./Assorted/randomNumber.cpp".
 
 - Assertive statements with "#include <cassert>" can detect problems and end the program. Regular assertions i.e. "assert(<true_thing>);" can
-  become more descriptive, i.e. "assert(<true_thing> && <string>);" will print to the console what was false, and the string passed to it. This
+  become more descriptive, i.e. "assert(true && std::string);" will print to the console what was false, and the string passed to it. This
   helps with error logging. However, asserts should not be used in production code, only to help with debugging. 
 
 - Static assertive statements can be used to evaluate code at compile time, without needing an "#include" header.
-  "static_assert(<true_thing>, <string_literal>);". It requires a constexpr as the <true_thing> however.
+  "static_assert(true, string);". It requires a constexpr as the "true" however.
 
 - There are multiple different explicit ways to cast a variable or literal. These include C and C++ style casts. C++ style casts have the
   benefit of being named, and being more specific. C style casts may also perform differently than expected. Check the following table:
     - C-Style Casts:
-      - "(<type>) <var/literal>"
-      - "<type>(<var.literal>)"
+      - "(T) x"
+      - "T(x)"
     - C++-Style Casts (In order of what the C-style cast tries to do):
-      - "const_cast<<type>>(<var/literal>)"
-      - "static_cast<<type>>(<var/literal>)"
-      - "reinterpret_cast<<type>>(<var/literal>)"
-      - "dynamic_cast<<type>>(<var/literal>)" (C-Style cast does not try to dynamic_cast at any point AFAIK)
+      - "const_cast<T>(x)"
+      - "static_cast<T>(x)"
+      - "reinterpret_cast<T>(x)"
+      - "dynamic_cast<T>(x)" (C-Style cast does not try to dynamic_cast at any point AFAIK)
       
 - Implicit type conversion is done by the compiler without instruction from the programmer.
 
@@ -283,3 +285,23 @@ Examples for all concepts and points either in "./Assorted/", or a seperate fold
 - An object is cheap to copy if it uses the size of <= 2 memory addresses.
 
 - "std::string_view" is cheaper to copy and easier to work with than "const std::string&" in parameters.
+
+- The address of operator, "&", can be placed before a variable to get its address in memory. The dereference operator, "*", can be
+  placed before a memory address to get the value at the address. Find an example of both (with undefined behavior) in
+  "./Assorted/addressOperators.cpp". When the variable that the "address of" operator is referencing has more than one byte, it
+  gives the address of the first byte.
+
+- Pointers can be used to point to the address of an object in memory. Pointers, like other variables, must be initialized to a value,
+  or else they will give garbage out. When a pointer is initialized with an empty direct-list initialization, it will be a null-pointer.
+  Find an example in "./Assorted/pointers.cpp".
+
+- Pointers that point to an object that no longer exists are dangling pointers, very similar to dangling references.
+
+- Null-pointers, mentioned previously, are pointers that don't point to any value. Attempting to print the value will lead to undefined
+  behavior, g++ gives a segfault error. Example in "./Assorted/nullPointers.cpp".
+
+- Pointers that become dangling should always reach the end of their lifetime, or be set to nullptr. Dangling pointers themselves should
+  exist for the shortest amount of time possible in any case. This allows one to assume any "!= nullptr" pointer is valid and not dangling,
+  and that any "== nullptr" pointer is null (obviously).
+
+- Older code might use outdated ways of assigning a pointer to null i.e. "T* x {0}", "T* x {NULL};" instead of the modern "T* x {nullptr};"
