@@ -26,7 +26,7 @@ std::string_view posMatrix(std::string_view computer, std::string_view player) {
             return "lost.";
     }
 
-    return "Unknown match.";
+    return "Unknown match."; // Should never happen.
 }
 
 std::string_view randomResponse() {
@@ -38,9 +38,11 @@ std::string_view randomResponse() {
         return "rock";
     case 1:
         return "paper";
-    default:
+    case 2:
         return "scissors";
     }
+    
+    return "Error"; // Should never happen.
 }
 
 std::string getInput(std::string_view text) {

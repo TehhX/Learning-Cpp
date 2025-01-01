@@ -324,3 +324,14 @@ Not everything stated is true 100% of the time, this is from the general experie
 - Prefer pass by reference to pass by address when possible. Avoids null-pointer errors. If using pass by address, place "assert(ptr)"
   at the start of the function to make sure the program says when a null-pointer is accidentally passed. There are scenarios when a
   null pointer is acceptable/wanted when assert shouldn't be used.
+
+- A function with a pointer default argument can have that default argument as nullptr. Then, within that function, certain things can
+  be done if the pointer is null. Function overloading is often better, though.
+
+- Passing an address creates a copy of the pointer, meaning that the original pointer passed as the argument cannot be changed within
+  the function, such as changing what it points at (but what it points at CAN be changed). To change the original pointer from within
+  a function, the address must be passed by reference. Example at "./Assorted/passAddressByRef.cpp".
+
+- Returning by reference is often less expensive than returning by value. It just requires the return reference to outlive the
+  function. Placing const before the return type does nothing special at runtime, but helps to prevent bad code. Example in
+  "./Assorted/returnBy.cpp".
