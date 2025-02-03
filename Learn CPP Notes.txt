@@ -335,3 +335,20 @@ Not everything stated is true 100% of the time, this is from the general experie
 - Returning by reference is often less expensive than returning by value. It just requires the return reference to outlive the
   function. Placing const before the return type does nothing special at runtime, but helps to prevent bad code. Example in
   "./Assorted/returnBy.cpp".
+
+- If a parameter is passed by reference, it can safely be returned as a reference because its lifetime will exist outside of the
+  function's scope.
+
+- Functions that return a reference can be used as the LHS of an operation. Example in "Assorted/outParameters.cpp".
+  Out parameters can also be used to modify variables that exist outside of the scope of a function.
+
+- Prefer returning by reference over by pointer, unless it is important to have returning nullptr as a possibility.
+
+- Out parameters should be avoided unless they truely are the best option for a given issue.
+
+- Optional objects can be returned instead of their regular counterparts if an error is possible to occur inside the function.
+  Example in "Assorted/optionals.cpp".
+
+- Prefer passing by const T& instead of T& when possible, as more things are possible with constant reference values as parameters.
+
+- 
