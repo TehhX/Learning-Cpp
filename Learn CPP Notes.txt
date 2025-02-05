@@ -351,4 +351,14 @@ Not everything stated is true 100% of the time, this is from the general experie
 
 - Prefer passing by const T& instead of T& when possible, as more things are possible with constant reference values as parameters.
 
-- 
+- User defined types like enumerations and classes can be used for compound data types that are not defined by Cpp.
+  Example in "Assorted/basicStruct.cpp" and "Assorted/basicEnumerator.cpp".
+
+- Place enumerators inside their own namespaces. Example in "Assorted/namespacedEnumerator.cpp"
+
+- Enumerators can have assigned values inside of them. Any unassigned enumerations inside of an enum that also contains assigned
+  enumerations will always continue from the last enumeration. More than one enumeration can be assigned the same number, even if
+  it is just the same number as an unassigned enumeration. Examples in "Assorted/assignedEnumerator.cpp". 
+
+- Enumerators have a base type, usually of type "int". However, they can be speicified at the enum header. Example in
+  "Assorted/enumBaseTypes.cpp"
