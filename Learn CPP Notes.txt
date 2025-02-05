@@ -369,6 +369,6 @@ Not everything stated is true 100% of the time, this is from the general experie
 
 - Enums should always have a specified base type, even if it is just "int". Example with reason why in "Assorted/enumTypeConversions.cpp"
 
-- Enums can be converted to and from strings. Example in "Assorted/enumIOConversion.cpp"
+- Enums can be converted to and from strings. Example in "Assorted/enumStringInput.cpp" and "Assorted/enumStringOutput.cpp".
 
 - 
