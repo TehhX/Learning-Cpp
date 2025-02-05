@@ -362,3 +362,13 @@ Not everything stated is true 100% of the time, this is from the general experie
 
 - Enumerators have a base type, usually of type "int". However, they can be speicified at the enum header. Example in
   "Assorted/enumBaseTypes.cpp"
+
+- Maybe prefer unnamed enums inside namespaces if the namespace only contains the enum itself. Example in "Assorted/simpleEnumScopes.cpp"
+
+- Default (first/0) enum values should be the value seen as the defualt, or as close to what the default is as can be.
+
+- Enums should always have a specified base type, even if it is just "int". Example with reason why in "Assorted/enumTypeConversions.cpp"
+
+- Enums can be converted to and from strings. Example in "Assorted/enumIOConversion.cpp"
+
+- 
