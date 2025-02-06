@@ -50,7 +50,7 @@ Not everything stated is true 100% of the time, this is from the general experie
   - Do not include .cpp files
 
 - Defining certain macros can make certain lines of code not compile with #ifdef for various purposes. Find an example
-  in "./Assorted/debugDefinition.cpp".
+  in "/debugDefinition.cpp".
 
 - Refactoring is the act of changing the code of a program without changing its behavior
 
@@ -176,7 +176,7 @@ Not everything stated is true 100% of the time, this is from the general experie
     found at "Learning-Cpp/Assorted/staticVariables.cpp". These static-local variables can be used to generate a new copy of an integer/other
     type every function call, while keeping track of what increment the variable should be.
 
-- Constexpr if statements can be used if constexpr variables defined before are a part of the condition, see "./Assorted/constexprIf.cpp".
+- Constexpr if statements can be used if constexpr variables defined before are a part of the condition, see "/constexprIf.cpp".
 
 - Don't indent switch statement cases i.e.
     switch (value) {
@@ -194,11 +194,11 @@ Not everything stated is true 100% of the time, this is from the general experie
   point. It doesn't do anything other than show that fallthrough is intentional, and potentially disable some compuler warnings, as the
   code will execute just the same without it.
 
-- The "goto" keyword can jump to a particular part of the program by a label. An example can be found in "./Assorted/gotoBackwards.cpp".
-  The goto label can also jump forwards, found in "./Assorted/gotoForwards.cpp". Goto statements do not need to be declared by the time they're
+- The "goto" keyword can jump to a particular part of the program by a label. An example can be found in "/gotoBackwards.cpp".
+  The goto label can also jump forwards, found in "/gotoForwards.cpp". Goto statements do not need to be declared by the time they're
   called, like variables and functions do. Goto statements are generally unused, but have some niche uses.
 
-- Modulus usage example in "./Assorted/fizzBuzz.cpp".
+- Modulus usage example in "/fizzBuzz.cpp".
 
 - The "continue" keyword can be used to break out of the current iteration of a loop statement, but continue to loop through it starting at
   the next index, or beginning. This keyword is used similarly to the "break" keyword, but doesn't completely exit the loop.
@@ -210,7 +210,7 @@ Not everything stated is true 100% of the time, this is from the general experie
   picked or otherwidse generated. A single random number can be taken from "std::random_device", and put into the Mersenne Twister algorithm.
   It should be input multiple times (8 minimum) to help seed the MT algorithm. A uniform integer distributor can be used to distribute random
   numbers taken from this algorithm, and distribute the numbers between a minimum and maximum. Multiple different distributors can be used with
-  the same RNG. An example of an RNG can be found in "./Assorted/randomNumber.cpp".
+  the same RNG. An example of an RNG can be found in "/randomNumber.cpp".
 
 - Assertive statements with "#include <cassert>" can detect problems and end the program. Regular assertions i.e. "assert(<true_thing>);" can
   become more descriptive, i.e. "assert(true && std::string);" will print to the console what was false, and the string passed to it. This
@@ -236,7 +236,7 @@ Not everything stated is true 100% of the time, this is from the general experie
   will be declared in the global namespace of all ".cpp" files that include the header file. This is useful for shortening long type names.
 
 - Functions with parameters may have default arguments for any or all of the parameters. The argument MUST be defined with the copy operator
-  "=", direct-list initialization and others won't work. See "./Assorted/defaultArguments.cpp".
+  "=", direct-list initialization and others won't work. See "/defaultArguments.cpp".
 
 - Templates are a functionality in C++ for creating reusable functions that can take multiple different types for a single parameter.
   - Certain input types can be deleted with the "= delete;" suffix, replacing all type placeholders with whatever should not be allowed.
@@ -249,10 +249,10 @@ Not everything stated is true 100% of the time, this is from the general experie
 - When compiling multiple files, start with the .cpp file that has the main function in it, or else the compiler will throw an error.
 
 - Creating a constexpr variable requires the initializing variable to be a constant or literal itself. That means that functions aren't allowed
-  as the input. This is where constexpr functions come into play. Find an example of its usage in "./Assorted/constexprFunc.cpp".
+  as the input. This is where constexpr functions come into play. Find an example of its usage in "/constexprFunc.cpp".
 
 - LValue references can be used to reference an existing variable and make somewhat of an alias of it. Reference variables MUST be initialized
-  on declaration, it cannot be left null. Find an example in "./Assorted/lvalueRef.cpp".
+  on declaration, it cannot be left null. Find an example in "/lvalueRef.cpp".
 
 - LValue references cannot initialize and reference to:
   - Const vars, when the reference itself is not also const
@@ -274,7 +274,7 @@ Not everything stated is true 100% of the time, this is from the general experie
 - Passing by value and passing by reference are two different things. They both refer to arguments inserted into function parameters, however
   what they pass are different. When passing by value, the object argument is copied onto the parameter in the function, and the function runs.
   This is fine for primitive types, but for classes and more expensive types, passing by reference is cheaper to run. Find an example in
-  "./Assorted/passByRef.cpp".
+  "/passByRef.cpp".
 
 - Passing by value also differs to reference in terms of what can be edited in the function. Passing by value allows one to edit a copy
   of the passed value or class object etc, leaving the original intact. While this is desirable a lot of the time, passing by reference
@@ -288,17 +288,17 @@ Not everything stated is true 100% of the time, this is from the general experie
 
 - The address of operator, "&", can be placed before a variable to get its address in memory. The dereference operator, "*", can be
   placed before a memory address to get the value at the address. Find an example of both (with undefined behavior) in
-  "./Assorted/addressOperators.cpp". When the variable that the "address of" operator is referencing has more than one byte, it
+  "/addressOperators.cpp". When the variable that the "address of" operator is referencing has more than one byte, it
   gives the address of the first byte.
 
 - Pointers can be used to point to the address of an object in memory. Pointers, like other variables, must be initialized to a value,
   or else they will give garbage out. When a pointer is initialized with an empty direct-list initialization, it will be a null-pointer.
-  Find an example in "./Assorted/pointers.cpp".
+  Find an example in "/pointers.cpp".
 
 - Pointers that point to an object that no longer exists are dangling pointers, very similar to dangling references.
 
 - Null-pointers, mentioned previously, are pointers that don't point to any value. Attempting to print the value will lead to undefined
-  behavior, g++ gives a segfault error. Example in "./Assorted/nullPointers.cpp".
+  behavior, g++ gives a segfault error. Example in "/nullPointers.cpp".
 
 - Pointers that become dangling should always reach the end of their lifetime, or be set to nullptr. Dangling pointers themselves should
   exist for the shortest amount of time possible in any case. This allows one to assume any "!= nullptr" pointer is valid and not dangling,
@@ -309,7 +309,7 @@ Not everything stated is true 100% of the time, this is from the general experie
 - Pointers of a non const type cannot point at a const type. The type of a pointer must be made const to point at a const type. This means
   that the pointer cannot modify the const variable. Pointers of a const type i.e. "const int" can point at a non const variable i.e "int".
   The pointer, however, still cannot modify the variable it points at, whether the variable is const or not. Example in
-  "./Assorted/constPointers.cpp".
+  "/constPointers.cpp".
 
 - Pointers themselves, not the type they point at, can also be const. This changes it so that the pointer cannot be reseated. However, a
   const pointer can still be dereferenced to change the value at the address. This means that the only thing that is different about
@@ -319,7 +319,7 @@ Not everything stated is true 100% of the time, this is from the general experie
   differ from one another.
 
 - Another way to pass through a parameter is by address (in addition to value and reference from before). Example in 
-  "./Assorted/passByAddress.cpp"
+  "/passByAddress.cpp"
 
 - Prefer pass by reference to pass by address when possible. Avoids null-pointer errors. If using pass by address, place "assert(ptr)"
   at the start of the function to make sure the program says when a null-pointer is accidentally passed. There are scenarios when a
@@ -330,16 +330,16 @@ Not everything stated is true 100% of the time, this is from the general experie
 
 - Passing an address creates a copy of the pointer, meaning that the original pointer passed as the argument cannot be changed within
   the function, such as changing what it points at (but what it points at CAN be changed). To change the original pointer from within
-  a function, the address must be passed by reference. Example at "./Assorted/passAddressByRef.cpp".
+  a function, the address must be passed by reference. Example at "/passAddressByRef.cpp".
 
 - Returning by reference is often less expensive than returning by value. It just requires the return reference to outlive the
   function. Placing const before the return type does nothing special at runtime, but helps to prevent bad code. Example in
-  "./Assorted/returnBy.cpp".
+  "/returnBy.cpp".
 
 - If a parameter is passed by reference, it can safely be returned as a reference because its lifetime will exist outside of the
   function's scope.
 
-- Functions that return a reference can be used as the LHS of an operation. Example in "Assorted/outParameters.cpp".
+- Functions that return a reference can be used as the LHS of an operation. Example in "outParameters.cpp".
   Out parameters can also be used to modify variables that exist outside of the scope of a function.
 
 - Prefer returning by reference over by pointer, unless it is important to have returning nullptr as a possibility.
@@ -347,46 +347,78 @@ Not everything stated is true 100% of the time, this is from the general experie
 - Out parameters should be avoided unless they truely are the best option for a given issue.
 
 - Optional objects can be returned instead of their regular counterparts if an error is possible to occur inside the function.
-  Example in "Assorted/optionals.cpp".
+  Example in "optionals.cpp".
 
 - Prefer passing by const T& instead of T& when possible, as more things are possible with constant reference values as parameters.
 
 - User defined types like enumerations and classes can be used for compound data types that are not defined by Cpp.
-  Example in "Assorted/basicStruct.cpp" and "Assorted/basicEnumerator.cpp".
+  Example in "basicStruct.cpp" and "basicEnumerator.cpp".
 
-- Place enumerators inside their own namespaces. Example in "Assorted/namespacedEnumerator.cpp"
+- Place enumerators inside their own namespaces. Example in "namespacedEnumerator.cpp"
 
 - Enumerators can have assigned values inside of them. Any unassigned enumerations inside of an enum that also contains assigned
   enumerations will always continue from the last enumeration. More than one enumeration can be assigned the same number, even if
-  it is just the same number as an unassigned enumeration. Examples in "Assorted/assignedEnumerator.cpp". 
+  it is just the same number as an unassigned enumeration. Examples in "assignedEnumerator.cpp". 
 
 - Enumerators have a base type, usually of type "int". However, they can be speicified at the enum header. Example in
-  "Assorted/enumBaseTypes.cpp"
+  "enumBaseTypes.cpp"
 
-- Maybe prefer unnamed enums inside namespaces if the namespace only contains the enum itself. Example in "Assorted/simpleEnumScopes.cpp"
+- Maybe prefer unnamed enums inside namespaces if the namespace only contains the enum itself. Example in "simpleEnumScopes.cpp"
 
 - Default (first/0) enum values should be the value seen as the defualt, or as close to what the default is as can be.
 
-- Enums should always have a specified base type, even if it is just "int". Example with reason why in "Assorted/enumTypeConversions.cpp"
+- Enums should always have a specified base type, even if it is just "int". Example with reason why in "enumTypeConversions.cpp"
 
-- Enums can be converted to and from strings. Example in "Assorted/enumStringInput.cpp".
+- Enums can be converted to and from strings. Example in "enumStringInput.cpp".
 
 - Scoped or class enums can be used for better encapsulation and type safety. They also have to be cast to whatever type is needed,
-  as implicit conversion doesn't occur like with unscoped enums. Example in "Assorted/scopedClassEmums.cpp"
+  as implicit conversion doesn't occur like with unscoped enums. Example in "scopedClassEmums.cpp"
 
 - Structs can function as basic classes. When initializing a struct, initialization goes in top-down order. Uninitialized values will
   be set to either an undefined value, or their default value. They can also have a default value.
 
 - Structs can be passed to and from functions. Structs can also be only used once. Structs can also be returned. 
-  Examples in "Assorted/passReturnStruct.cpp".
+  Examples in "passReturnStruct.cpp".
 
 - Structs are optimized by compilers depending on member type and declaration order. List struct members from top to bottom in decreasing
   size order.
 
 - When using pointers to take or change member values in an already initialized struct variable, the var must be dereferenced as usual
   with pointers. Arrow notation can be used instead when the struct is a pointer instead of dereferencing inside parenthesis.
-  Example in "Assorted/pointerStructs.cpp". The arrow notation is formally called the "member selection from pointer operator".
+  Example in "pointerStructs.cpp". The arrow notation is formally called the "member selection from pointer operator".
 
 - Structs can also use templates, much like functions can.
+
+- Structs made in C++17 need to have guides on how to auto assume types without needing the diamond operators. Example in 
+  "triadStruct.cpp".
+
+- Classes can also be used in place of structs for more complex types. They allow encapsulation with different access modifiers.
+  Most of the standard library is comprised of classes.
+
+- Both structs and classes can have member functions, as I have written in previous example files like "triadStruct.cpp"
+
+- The typical C++ declaration order from top to bottom doesn't apply for classes, so variables and functions can be declared/defined
+  in any order. However, members that initialize using another member of the same object that is itself initialized later will result
+  in undefined behavior.
+
+- General rule of thumb states that structs should only have member-variables, while classes may have member functions as well. However,
+  both structs and classes technically have the same ruleset. The only difference is that structs default to public member access,
+  while classes default to private.
+
+- Structs and classes can be made const just like other types, which means that none of their member variables may be changed. It also
+  means that non-const member functions may not be called from the const object. However, a "const" may be appended after the parameter
+  parenthesis and before the opening brace of a function to turn the function itself const. This assures the compiler that it doesn't
+  change any member variables, and it may be called even if the object is const. Given that const functions can be used no matter the
+  case, any function that fits the above criteria should be made const.
+
+- A member function being const or not will allow it to be overloaded with the other. This is very rare.
+
+- In java, when an instance variable and passed variable have the same name, the "this" keyword is used. In C++, it works as seen in
+  the "isEqual" function inside "intPair.cpp" using the arrow notation.
+
+- See an example of classes, const functions, the "this->x" keyword/notation, and access modifiers in "3dPointClass.cpp".
+
+- Classes need constructors for private members just like Java. Members should be initialized using the member initialization list
+  method. Example at "classConstructors.cpp".
 
 - 
