@@ -369,6 +369,10 @@ Not everything stated is true 100% of the time, this is from the general experie
 
 - Enums should always have a specified base type, even if it is just "int". Example with reason why in "Assorted/enumTypeConversions.cpp"
 
-- Enums can be converted to and from strings. Example in "Assorted/enumStringInput.cpp" and "Assorted/enumStringOutput.cpp".
+- Enums can be converted to and from strings. Example in "Assorted/enumStringInput.cpp".
 
-- 
+- Scoped or class enums can be used for better encapsulation and type safety. They also have to be cast to whatever type is needed,
+  as implicit conversion doesn't occur like with unscoped enums. Example in "Assorted/scopedClassEmums.cpp"
+
+- Structs can function as basic classes. When initializing a struct, initialization goes in top-down order. Uninitialized values will
+  be set to either an undefined value, or their default value. They can also have a default value.

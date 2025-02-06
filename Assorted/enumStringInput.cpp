@@ -1,5 +1,5 @@
 #include <iostream>
-#include <cstdint>
+#include <optional>
 
 // TODO: Incomplete file
 
@@ -11,37 +11,48 @@ enum Colors: int {
     brown
 };
 
-void printValue(const Colors& color) {
-    using namespace std;
-
-    switch(color) {
+constexpr std::string_view getString(const Colors color) {
+    switch (color) {
     case red:
-        cout << "Red";
-        break;
+        return "Red";
     case green:
-        cout << "Green";
-        break;
+        return "Green";
     case blue:
-        cout << "Blue";
-        break;
+        return "Blue";
     case orange:
-        cout << "Orange";
-        break;
+        return "Orange";
     case brown:
-        cout << "Brown";
-        break;
+        return "Brown";
     default:
-        cout << "???";
+        return NULL;
     }
+}
 
-    cout << endl;
+constexpr std::optional<Colors> getColor(const std::string_view string) {
+    if (string == "red")
+        return red;
+    if (string == "green")
+        return green;
+    if (string == "blue")
+        return blue;
+    if (string == "orange")
+        return orange;
+    if (string == "brown")
+        return brown;
+
+    return std::nullopt;
 }
 
 int main() {
-    std::cout << "Enter a value: ";
+    std::cout << "Enter a color: ";
 
-    int value {};
-    std::cin >> value;
+    std::string value {};
+    std::getline(std::cin >> std::ws, value);
 
-    printValue(static_cast<Colors>(value));
+    std::optional<Colors> color {getColor(value)};
+
+    if (!color)
+        std::cout << "Incorrect value.\n";
+    else
+        std::cout << getString(color.value()) << std::endl;
 }
