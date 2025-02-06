@@ -376,3 +376,17 @@ Not everything stated is true 100% of the time, this is from the general experie
 
 - Structs can function as basic classes. When initializing a struct, initialization goes in top-down order. Uninitialized values will
   be set to either an undefined value, or their default value. They can also have a default value.
+
+- Structs can be passed to and from functions. Structs can also be only used once. Structs can also be returned. 
+  Examples in "Assorted/passReturnStruct.cpp".
+
+- Structs are optimized by compilers depending on member type and declaration order. List struct members from top to bottom in decreasing
+  size order.
+
+- When using pointers to take or change member values in an already initialized struct variable, the var must be dereferenced as usual
+  with pointers. Arrow notation can be used instead when the struct is a pointer instead of dereferencing inside parenthesis.
+  Example in "Assorted/pointerStructs.cpp". The arrow notation is formally called the "member selection from pointer operator".
+
+- Structs can also use templates, much like functions can.
+
+- 
