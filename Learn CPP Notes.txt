@@ -432,4 +432,15 @@ Not everything stated is true 100% of the time, this is from the general experie
   implicit copy constructor usually does exactly what is required, and should thus be used most of the time. Copy constructors
   can also be specifically omitted using the "delete" keyword. Example at "copyConstructor.cpp".
 
-- 
+- Copy elision may be performed by the compiler to optimize away unnessessary object copying. This is why the copy constructor
+  should not have side-effects.
+
+- An aggregate is a class type (struct, class etc.) that has no member functions, no constructors and no access modifiers (unsure).
+
+- Member functions can be chained together by returning their class object using the "this" keyword. Example in "thisObject.cpp"
+
+- Class objects can be **reset** by setting their class object to the default state. Example in "thisObject.cpp".
+
+- Large classes should get their own .cpp and .h files. .h files should only declare, while the associated .cpp file should define.
+  For these large classes, only single line member functions should be defined inside the class itself, while the rest should be
+  defined outside using the "::" operator. I have tried to demonstrate every detail on how to create class files in "ClassFiles/*".
