@@ -421,4 +421,15 @@ Not everything stated is true 100% of the time, this is from the general experie
 - Classes need constructors for private members just like Java. Members should be initialized using the member initialization list
   method. Example at "classConstructors.cpp".
 
+- Classes can have overloaded constructors, or constructors with default arguments. Constructors can also have default constructors
+  using "class_name() = default". Example in "ball.cpp"
+
+- Classes can delegate to other constructors in the member list initialization. Example at "ball.cpp"".
+
+- Temporary class and/or fundamental objects can be created with "class_name var_name {value}". Example in "copyConstructor.cpp".
+
+- Copy constructors can be used to create a new class object of type T using a previously defined class opject of type T. The
+  implicit copy constructor usually does exactly what is required, and should thus be used most of the time. Copy constructors
+  can also be specifically omitted using the "delete" keyword. Example at "copyConstructor.cpp".
+
 - 
