@@ -1,5 +1,5 @@
 #include <iostream>
-#include "readWriteIO.h"
+#include "readWriteIO.hpp"
 
 int readNumber() {
     std::cout << "Write a number: ";

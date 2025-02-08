@@ -39,14 +39,14 @@ Not everything stated is true 100% of the time, this is from the general experie
   compiler will only complain if this practice is followed.
 
 - Header sorting should be as such:
-  - Paired header (in add.cpp, #include "add.h")
-  - Other headers of the same project (in x.cpp, #include "y.h")
+  - Paired header (in add.cpp, #include "add.hpp")
+  - Other headers of the same project (in x.cpp, #include "y.hpp")
   - 3rd party headers (in x.cpp, #include <boost/tuple/tuple.hpp>)
   - Standard library headers: (in x.cpp, #include <iostream>)
 
 - Header File Best Practices:
   - Always #pragma once
-  - Paried .cpp and .h files should be named the same i.e. x.cpp and x.h
+  - Paried .cpp and .hpp files should be named the same i.e. x.cpp and x.h
   - Do not include .cpp files
 
 - Defining certain macros can make certain lines of code not compile with #ifdef for various purposes. Find an example
@@ -441,6 +441,6 @@ Not everything stated is true 100% of the time, this is from the general experie
 
 - Class objects can be **reset** by setting their class object to the default state. Example in "thisObject.cpp".
 
-- Large classes should get their own .cpp and .h files. .h files should only declare, while the associated .cpp file should define.
+- Large classes should get their own .cpp and .hpp files. .hpp files should only declare, while the associated .cpp file should define.
   For these large classes, only single line member functions should be defined inside the class itself, while the rest should be
   defined outside using the "::" operator. I have tried to demonstrate every detail on how to create class files in "ClassFiles/*".

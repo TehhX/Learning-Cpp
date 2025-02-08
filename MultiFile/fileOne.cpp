@@ -1,4 +1,4 @@
-#include "header.h"
+#include "header.hpp"
 
 int main() {
     std::cout << "This is: " << add(28, 5) << '\n';

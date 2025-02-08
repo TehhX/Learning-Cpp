@@ -1,4 +1,4 @@
-#include "fooBar.h"
+#include "fooBar.hpp"
 
 int main() {
     ExampleNamespace::doSomething();

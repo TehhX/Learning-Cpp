@@ -1,4 +1,4 @@
-#include "fooBar.h"
+#include "fooBar.hpp"
 
 namespace ExampleNamespace {
     void doSomething() {

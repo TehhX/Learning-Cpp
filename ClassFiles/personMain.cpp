@@ -1,14 +1,26 @@
-#include "person.h"
+#include "person.hpp"
+
+#include <iostream>
 
 int main() {
     Person jerry {"Jerry", 12'000.00, 234, Profession::chef};
-    print(jerry);
+    jerry.print();
 
-    talkAboutIt(jerry);
+    jerry.talkAboutIt();
 
-    jerry.calculateBonus();
-    print(jerry);
+    jerry.giveRaise();
+    jerry.print();
 
     jerry.reset();
-    print(jerry);
+    jerry.print();
+
+    jerry.setName("Small Fella").setSalary(125'000.00);
+    std::string guyName { jerry.getName() };
+    double guySalary { jerry.getSalary() };
+
+    jerry.setName("Big Fella");
+    jerry.setSalary(250'000.00);
+
+    std::cout << "Object name: " << jerry.getName() << "\nObject salary: $" << jerry.getSalary() << '\n';
+    std::cout << "Variable name: " << guyName << "\nVariable salary: $" << guySalary << '\n';
 }

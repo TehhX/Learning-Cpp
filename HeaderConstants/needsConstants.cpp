@@ -1,4 +1,4 @@
-#include "constants.h"
+#include "constants.hpp"
 
 int main() {
     std::cout << "Gravity: " << Constants::gravity << '\n';
