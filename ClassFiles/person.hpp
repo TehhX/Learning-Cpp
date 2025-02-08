@@ -2,16 +2,17 @@
 
 #include <string>
 
-enum class Profession: int {
-    engineer,
-    plumber,
-    teacher,
-    programmer,
-    investor,
-    chef
-};
-
 class Person {
+public:
+    enum Profession: int {
+        engineer,
+        plumber,
+        teacher,
+        programmer,
+        investor,
+        chef
+    };
+
 private:
     // Private instance variables:
     std::string name;
@@ -46,4 +47,4 @@ public:
     void talkAboutIt() const;
 };
 
-std::ostream& operator<<(std::ostream&, const Profession&);
+std::ostream& operator<<(std::ostream&, const Person::Profession&);

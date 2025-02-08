@@ -3,7 +3,7 @@
 #include <iostream>
 
 int main() {
-    Person jerry {"Jerry", 12'000.00, 234, Profession::chef};
+    Person jerry {"Jerry", 12'000.00, 234, Person::Profession::chef};
     jerry.print();
 
     jerry.talkAboutIt();

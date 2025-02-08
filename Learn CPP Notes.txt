@@ -444,3 +444,16 @@ Not everything stated is true 100% of the time, this is from the general experie
 - Large classes should get their own .cpp and .hpp files. .hpp files should only declare, while the associated .cpp file should define.
   For these large classes, only single line member functions should be defined inside the class itself, while the rest should be
   defined outside using the "::" operator. I have tried to demonstrate every detail on how to create class files in "ClassFiles/*".
+
+- Type enums that are only used for a single class should be declared within the class at the top within a seperate "public:" tag.
+  Example in "ClassFiles/person.hpp".
+
+- Destructors can be used to perform some action when a class dies. They are made using the same syntax as a constructor, but takes
+  NO parameters, has NO return type, and must be preceeded by a tilde (~). Find an example in "destructors.cpp".
+
+- Classes may be made templated, so long as any member functions defined outside also use the template preline. Example in
+  "templateClass.cpp".
+
+- Static member variables may be used similarly to local static variables. Example in "staticMembers.cpp".
+
+- 

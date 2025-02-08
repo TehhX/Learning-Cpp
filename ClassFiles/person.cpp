@@ -27,7 +27,7 @@ int Person::getID() const {
     return id;
 }
 
-Profession Person::getProfession() const {
+Person::Profession Person::getProfession() const {
     return profession;
 }
 
@@ -73,14 +73,14 @@ void Person::talkAboutIt() const {
 }
 
 // Operator overloads -----------------------------------------------
-std::ostream& operator<<(std::ostream& out, const Profession& profession) {
+std::ostream& operator<<(std::ostream& out, const Person::Profession& profession) {
     switch (profession) {
-    case Profession::engineer:   return out << "Engineer";
-    case Profession::plumber:    return out << "Plumber";
-    case Profession::teacher:    return out << "Teacher";
-    case Profession::programmer: return out << "Programmer";
-    case Profession::investor:   return out << "Investor";
-    case Profession::chef:       return out << "Chef";
-    default:                     return out << "Profession error.";
+    case Person::Profession::engineer:   return out << "Engineer";
+    case Person::Profession::plumber:    return out << "Plumber";
+    case Person::Profession::teacher:    return out << "Teacher";
+    case Person::Profession::programmer: return out << "Programmer";
+    case Person::Profession::investor:   return out << "Investor";
+    case Person::Profession::chef:       return out << "Chef";
+    default:                             return out << "Profession error.";
     }
 }
