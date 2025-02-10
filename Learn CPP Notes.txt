@@ -456,4 +456,13 @@ Not everything stated is true 100% of the time, this is from the general experie
 
 - Static member variables may be used similarly to local static variables. Example in "staticMembers.cpp".
 
-- 
+- The "friend" keyword can be used to allow a function to access private variables of a class. This is often a bad approach.
+
+- Friend classes are made in the same way as friend functions, by adding the "friend" keyword to the declaration within the friend
+  class.
+
+- Ref qualifiers can be used to overload functions with both a r-value and l-value friendly return value. Example in "refQualifier.cpp".
+  They are not reccomended.
+
+- Vectors are a container type that can hold many values. Define them using "{value1, value2, ...}". To make an empty vector array,
+  use direct initialization where n is the size of the array, "std::vector var (n);"
