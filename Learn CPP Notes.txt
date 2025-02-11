@@ -466,3 +466,16 @@ Not everything stated is true 100% of the time, this is from the general experie
 
 - Vectors are a container type that can hold many values. Define them using "{value1, value2, ...}". To make an empty vector array,
   use direct initialization where n is the size of the array, "std::vector var (n);"
+
+- Arrays can be returned by value due to move semantics.
+
+- Using "array.size()" gives the size of the array.
+
+- With vectors, many things can be done to modify them. Examples of all in "vectorModification.cpp".
+
+- Boolean vector arrays are problematic to work with. Use char vectors instead, or bitsets if values are known beforehand.
+
+- If the content or length of an array is known in its entirety at compile time, use an "std::array". The bonus of arrays when
+  compared to vectors is that they may be made const or constexpr.
+
+- Array lengths of std::array's can be returned as constexpr values as unsigned ints.
