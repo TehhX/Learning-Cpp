@@ -479,3 +479,10 @@ Not everything stated is true 100% of the time, this is from the general experie
   compared to vectors is that they may be made const or constexpr.
 
 - Array lengths of std::array's can be returned as constexpr values as unsigned ints.
+
+- The integral type of std::array length values are "std::size_t".
+
+- Arrays of references are not allowed, but arrays of reference wrappers are. Example in "refWrappedArray.cpp".
+
+- Pointer arithmatic may be used to manually change the address of a pointer by the size of the type that the pointer points to.
+  Example in "pointerMath.cpp".
