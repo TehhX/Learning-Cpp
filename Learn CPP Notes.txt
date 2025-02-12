@@ -486,3 +486,7 @@ Not everything stated is true 100% of the time, this is from the general experie
 
 - Pointer arithmatic may be used to manually change the address of a pointer by the size of the type that the pointer points to.
   Example in "pointerMath.cpp".
+
+- Multidimensional arrays and vectors are supported. Example in "multiDimArray.cpp".
+
+- 
