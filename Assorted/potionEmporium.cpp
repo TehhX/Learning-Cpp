@@ -2,8 +2,6 @@
 #include <array>
 #include <vector>
 
-// TODO: Unfinished.
-
 class Potion {
 public:
     enum Type {
@@ -12,6 +10,16 @@ public:
         speed,
         invisibility
     };
+
+    friend std::ostream& operator<<(std::ostream& out, const Potion::Type& type) {
+        switch (type) {
+        case Potion::healing:      return out << "healing";
+        case Potion::mana:         return out << "mana";
+        case Potion::speed:        return out << "speed";
+        case Potion::invisibility: return out << "invisibility";
+        default:                   return out;
+        }
+    }
 
 private:
     Type type;
@@ -24,16 +32,6 @@ public:
     Type getType() const { return type; }
     int getCost() const { return cost; }
 };
-
-std::ostream& operator<<(std::ostream& out, const Potion::Type& type) {
-    switch (type) {
-    case Potion::healing:      return out << "healing";
-    case Potion::mana:         return out << "mana";
-    case Potion::speed:        return out << "speed";
-    case Potion::invisibility: return out << "invisibility";
-    default:                   return out;
-    }
-}
 
 const std::array<Potion, 4> potions {{
     {Potion::healing, 20},
@@ -48,6 +46,8 @@ struct Character {
     std::array<int, 4> potions;
 };
 
+Character character {"Alex", 90};
+
 void printShop() {
     std::cout << "Here is our selection for today:\n";
 
@@ -55,8 +55,6 @@ void printShop() {
     for (const auto& potion : potions)
         std::cout << ++i << ") " << potion.getType() << " costs " << potion.getCost() << ".\n";
 }
-
-Character character {"Alex", 90};
 
 bool takeInput() {
     std::cout << "Enter the number of the potion you'd like to buy, or 'q' to quit: ";
@@ -70,12 +68,19 @@ bool takeInput() {
         if (input == 'q')
             return false;
         
-        Potion::Type type { static_cast<Potion::Type>(input - '0') };
+        Potion::Type type { static_cast<Potion::Type>(input - '1') };
 
-        if (type > 0 && type <= 4) {
-            character.potions[type - 1]++;
-            
-            return true;
+        if (type >= 0 && type < 4) {
+            if (potions[type].getCost() < character.gold) {
+                character.gold -= potions[type].getCost();
+                character.potions[type]++;
+                return true;
+            }
+
+            else {
+                std::cout << "You cannot afford that.\n\n";
+                return true;
+            }
         }
 
         else
@@ -83,22 +88,23 @@ bool takeInput() {
     }
 }
 
-int getPotionCount(const Potion::Type& type) {
-    return character.potions[type];
+void printPotionCount(const Potion& potion) {
+    if (!character.potions[potion.getType()])
+        return;
+
+    std::cout << character.potions[potion.getType()] << "x potions of " << potion.getType() << '\n';
 }
 
 int main() {
     std::cout << "Welcome to roscoe's potion emporium!\n";
-    Character character {"Alex", 90};
 
     while (takeInput());
 
-    std::cout << "Your inventory contains:\n" <<
-                 getPotionCount(Potion::healing) << "x potion of speed\n" <<
-                 getPotionCount(Potion::mana) << "x potion of mana\n" <<
-                 getPotionCount(Potion::speed) << "x potion of speed\n" <<
-                 getPotionCount(Potion::invisibility) << "x potion of invisibility\n" <<
-                 "You escaped with " << character.gold << " gold remaining.\n\n" <<
-                 
-                 "Thank you for shopping at Roscoe's potion emporium!\n";
+    std::cout << "Your inventory contains:\n";
+
+    for (const auto& potion : potions)
+        printPotionCount(potion);
+
+    std::cout << "\nYou escaped with " << character.gold << " gold remaining.\n\n" <<
+                   "Thank you for shopping at Roscoe's potion emporium!\n";
 }
