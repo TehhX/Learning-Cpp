@@ -1,9 +1,3 @@
-Examples for all concepts and points either in "./Assorted/", or a seperate folder if they have multiple files. >= C++17 assumed.
-Not everything stated is true 100% of the time, this is from the general experience of someone new to the language learning from
-"learncpp.com". No consistency is guaranteed :^)
-
--------------------------------------------------------------------------------------------------------------------------------------------------
-
 - Use direct-list initialization: int x { value }; for various reasons including:
   - Value Must be of the given type, or compiler will give an error i.e. int x {4.5} will give an error, 4.5 is not an integer
   - Does not involve copying data, more effecient
