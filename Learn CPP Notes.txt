@@ -483,4 +483,19 @@
 
 - Multidimensional arrays and vectors are supported. Example in "multiDimArray.cpp".
 
-- 
+- Array iterators example in "iterators.cpp".
+
+- Void pointers can be used to point to any data type, and reassigned to a different or same type. Example in "voidPointers.cpp"
+
+- Pointers can point to functions. Example in "funcPointers.cpp"/
+
+- Cpp files can take command line arguments using a special main function. Example in "commandLineArguments.cpp".
+
+- Lambdas can be used as anonymous functions. Example in "lambdas.cpp".
+
+- Lambdas can only access variables in their scope. To "capture" variables from inside its parent scope, use the "[]" capture
+  clause.
+  - You cannot change a captured variable without declaring the lambda as "mutable" after the () and before the {}.
+  - Lambda captures are copies. To capture by reference, use "[&variableName]" in place of "[variableName]"
+  - To capture all variables in the parent scope, use "[=]" for copy, and "[&]" for reference.
+  - To capture multiple particular variables, comma seperate them.
