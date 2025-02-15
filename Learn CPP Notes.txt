@@ -499,3 +499,9 @@
   - Lambda captures are copies. To capture by reference, use "[&variableName]" in place of "[variableName]"
   - To capture all variables in the parent scope, use "[=]" for copy, and "[&]" for reference.
   - To capture multiple particular variables, comma seperate them.
+
+- Friend functions that have been declared within a class are technically not a member function. Therefore, the standard
+  definition notation will not work, i.e. "ClassName::MemberFunction()". Friend functions should be defined as if they were
+  non-member functions (because they are) like "MemberFunction()" (omit the "ClassName::").
+
+- 
