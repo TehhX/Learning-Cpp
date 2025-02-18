@@ -504,4 +504,6 @@
   definition notation will not work, i.e. "ClassName::MemberFunction()". Friend functions should be defined as if they were
   non-member functions (because they are) like "MemberFunction()" (omit the "ClassName::").
 
-- 
+- Memory can be dynamically allocated using the "new" and "delete" keywords, along with pointers to access them.
+
+- std::initializer_list can be used in class constructors to accept initializer lists.
