@@ -8,7 +8,7 @@
 #include <iostream>
 #include <random>
 
-constexpr int runsPer { 1000000 };
+constexpr int runsPer { 10'000'000 };
 
 int getRandomInt(const int min, const int max) {
     static std::random_device rd {};
@@ -23,9 +23,6 @@ bool playRound(const bool swap) {
 	const int correct { getRandomInt(0, 2) };
 	int chosen { getRandomInt(0, 2) };
 	
-	if (correct == chosen)
-		return true;
-	
 	int revealed;
 	if (chosen == 0)
 		revealed = getRandomInt(1, 2);
@@ -38,10 +35,8 @@ bool playRound(const bool swap) {
 		return false;
 	
 	if (swap) {
-		const bool zeroTaken = revealed == 0 || chosen == 0;
-		const bool oneTaken  = revealed == 1 || chosen == 1;
-		const bool twoTaken  = revealed == 2 || chosen == 2;
-		
+		const bool zeroTaken { revealed == 0 || chosen == 0 };
+		const bool oneTaken  { revealed == 1 || chosen == 1 };
 		if (zeroTaken)
 			chosen = (oneTaken ? 2 : 1);
 		else if (oneTaken)
@@ -57,16 +52,19 @@ constexpr int getPercent(const float value) {
 	return value / runsPer * 100;
 }
 
-int main() {	
+int main() {
 	int stayWins { 0 };
 	int swapWins { 0 };
 	
 	for (int i { 0 }; i < runsPer; i++) {
 		stayWins += playRound(false);
 		swapWins += playRound(true);
+		
+		if (i % static_cast<int>(runsPer * 0.1f) == 0)
+			std::cout << '.' << std::flush;
 	}
 	
-	std::cout << "Stay Wins: "         << stayWins << '/' << runsPer << '\n';
+	std::cout << "\nStay Wins: "       << stayWins << '/' << runsPer << '\n';
 	std::cout << "Swap Wins: "         << swapWins << '/' << runsPer << '\n';
 	std::cout << "Ratio (Stay:Swap): " << getPercent(stayWins) << ':' << getPercent(swapWins) << std::endl;
 }
