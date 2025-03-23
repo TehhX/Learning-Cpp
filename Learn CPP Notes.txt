@@ -514,3 +514,21 @@
 - One can override pretty much any operator in a user-defined class type. Refer back to learncpp.com as needed.
 
 - One can override typecasts in a user defined class. Example in userTypecast.cpp.
+
+- std::unique_ptr can be used to make a smart pointer (along with other types for different effects). Example in uniquePtr.cpp
+
+- std::shared_ptr is like a unique pointer in that it manages a resource, but more than one can point to the same resource.
+  It will only delete said resource when the last shared_ptr that points to it goes out of scope.
+
+- In all std::whatever_ptr cases, using std::make_whatever is preferred over using the type by itself. Example in uniquePtr.cpp.
+
+- Inheritance can be used to make derivations of other base classes. Example in inheritance.cpp.
+
+- One may have a reference of type Base to any derived type. However, any derived member functions cannot be accessed
+  from this reference, pointer, array of type Base etc, and instead the base function of that name will be called. This is where 
+  virtual functions are useful. They resolve to the most derived version of the function. Example in virtualFuncs.cpp.
+
+- The override specifier (NOT keyword) should be added to virtual functions that override the base class. It goes in the same place
+  as const goes in the function. If the functions is both const and override, they must be written in that order (const override).
+  The final specifier can be used in a base class in the same place to disallow functions from being overidden. Example in
+  virtualFuncs.cpp.
