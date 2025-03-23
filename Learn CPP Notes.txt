@@ -507,3 +507,10 @@
 - Memory can be dynamically allocated using the "new" and "delete" keywords, along with pointers to access them.
 
 - std::initializer_list can be used in class constructors to accept initializer lists.
+
+- Transactional operations can be used as an "all or nothing" operation. If at any point in the operation an error occurs,
+  it fails entirely instead of somewhat which can lead to less confusion. Example in transactional.cpp.
+
+- One can override pretty much any operator in a user-defined class type. Refer back to learncpp.com as needed.
+
+- One can override typecasts in a user defined class. Example in userTypecast.cpp.
