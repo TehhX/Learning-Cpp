@@ -201,7 +201,7 @@
   call "func", and then exit the program as "std::exit();" does after "func" completes.
 
 - Random numbers in C++ can be generated using multiple functions from "#include <random>". First, a random number for the seed needs to be
-  picked or otherwidse generated. A single random number can be taken from "std::random_device", and put into the Mersenne Twister algorithm.
+  picked or otherwise generated. A single random number can be taken from "std::random_device", and put into the Mersenne Twister algorithm.
   It should be input multiple times (8 minimum) to help seed the MT algorithm. A uniform integer distributor can be used to distribute random
   numbers taken from this algorithm, and distribute the numbers between a minimum and maximum. Multiple different distributors can be used with
   the same RNG. An example of an RNG can be found in "/randomNumber.cpp".
@@ -532,3 +532,41 @@
   as const goes in the function. If the functions is both const and override, they must be written in that order (const override).
   The final specifier can be used in a base class in the same place to disallow functions from being overidden. Example in
   virtualFuncs.cpp.
+
+- Derived classes with explicit destructors in their base class need these destructors to be made virtual. This ensures that
+  instead of simply calling the base destructor when destructing a derived object, it will first use the derived destructor,
+  then the base destructor. However, this incudes a small performance impact, so do this only when it is useful, or explicitly
+  required. Example in virtualDestructors.cpp.
+
+- Entire classes may be marked with the "final" specifier to make inheritance illegal.
+
+- Binding defines the way a function is jumped to in the machine code. Early binding is solved at compile time, and is fast.
+  Late binding is solved at runtime, and is slower. Late binding occurs if the function another function will jump to is unknown
+  at compile time.
+
+- Binding nomenclature:
+    - Early binding/static dispatch = direct function call overload resolution
+    - Late binding = indirect function call resolution
+    - Dynamic dispatch = virtual function override resolution
+
+- Virtual functions use a virtual table behind the scenes to get the correct function to call. Knowing how they work is not required
+  to use virtual functions, as they are not for the sake of the end user. Essentially, how virtual functions work makes them slower
+  than final or non-overriding functions.
+
+- Pure virtual functions are virtual functions without a base definition, like abstract functions/methods in other languages. Making
+  a pure virtual function in a given class makes that class, and any derivations which do not define all passed-down pure virtual
+  functions, abstract. Abstract classes cannot be instantiated by themselves, instead a concrete derivation must be used. Example
+  in abstractClasses.cpp.
+
+- Interface classes are those which consist entirely of pure virtual functions and no variables.
+
+- Virtual base classes may be used to avoid multiple copies of a base-base-class if multiple-inheritance is used. Refer to this
+  later if required, doubt it.
+
+- Another casting type besides static_cast<T>(in) is dynamic_cast<T>(in). This casting type is most useful for casting base types
+  to a particular derived type of that base. When using dynamic_cast, make sure that (in) is actually a derived type, otherwise
+  the cast will fail, and will return a null_ptr. This can also be worked around by simply checking if the return value is null.
+
+- Derived classes may need to override operator<<. In this case, classes cannot make operator<< virutal. Instead, make use of a
+  single operator<< override in the base class, and derived virtual functions that provide the output to operator<<. Example
+  in derivedOutput.cpp.
