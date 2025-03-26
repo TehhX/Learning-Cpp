@@ -52,17 +52,17 @@
   i.e. unsigned int x {5};
 
 - The standard library allows fixed-width integers (Must "#include <cstdint>" All have "std::" prefix) Value ranges:
-    -  int8_t = 1 byte signed    =                       -128 -> 127
-    - uint8_t = 1 byte unsigned  =                          0 -> 255
+  -  int8_t = 1 byte signed    =                       -128 -> 127
+  - uint8_t = 1 byte unsigned  =                          0 -> 255
 
-    -  int16_t = 2 byte signed   =                    -32,768 -> 32,767
-    - uint16_t = 2 byte unsigned =                          0 -> 65,535
+  -  int16_t = 2 byte signed   =                    -32,768 -> 32,767
+  - uint16_t = 2 byte unsigned =                          0 -> 65,535
 
-    -  int32_t = 4 byte signed   =             -2,147,483,648 -> 2,147,483,647
-    - uint32_t = 4 byte unsigned =                          0 -> 4,294,967,295
+  -  int32_t = 4 byte signed   =             -2,147,483,648 -> 2,147,483,647
+  - uint32_t = 4 byte unsigned =                          0 -> 4,294,967,295
 
-    -  int64_t = 8 byte signed   = -9,223,372,036,854,775,808 ->  9,223,372,036,854,775,807
-    - uint64_t = 8 byte unsigned =                          0 -> 18,446,744,073,709,551,615
+  -  int64_t = 8 byte signed   = -9,223,372,036,854,775,808 ->  9,223,372,036,854,775,807
+  - uint64_t = 8 byte unsigned =                          0 -> 18,446,744,073,709,551,615
 
 - Append 'f' to a number to ensure it is of float type instead of the implied double i.e. "5.0" is a double, "5.0f" is a float.
 
@@ -215,14 +215,14 @@
 
 - There are multiple different explicit ways to cast a variable or literal. These include C and C++ style casts. C++ style casts have the
   benefit of being named, and being more specific. C style casts may also perform differently than expected. Check the following table:
-    - C-Style Casts:
-      - "(T) x"
-      - "T(x)"
-    - C++-Style Casts (In order of what the C-style cast tries to do):
-      - "const_cast<T>(x)"
-      - "static_cast<T>(x)"
-      - "reinterpret_cast<T>(x)"
-      - "dynamic_cast<T>(x)" (C-Style cast does not try to dynamic_cast at any point AFAIK)
+  - C-Style Casts:
+    - "(T) x"
+    - "T(x)"
+  - C++-Style Casts (In order of what the C-style cast tries to do):
+    - "const_cast<T>(x)"
+    - "static_cast<T>(x)"
+    - "reinterpret_cast<T>(x)"
+    - "dynamic_cast<T>(x)" (C-Style cast does not try to dynamic_cast at any point AFAIK)
       
 - Implicit type conversion is done by the compiler without instruction from the programmer.
 
@@ -545,9 +545,9 @@
   at compile time.
 
 - Binding nomenclature:
-    - Early binding/static dispatch = direct function call overload resolution
-    - Late binding = indirect function call resolution
-    - Dynamic dispatch = virtual function override resolution
+  - Early binding/static dispatch = direct function call overload resolution
+  - Late binding = indirect function call resolution
+  - Dynamic dispatch = virtual function override resolution
 
 - Virtual functions use a virtual table behind the scenes to get the correct function to call. Knowing how they work is not required
   to use virtual functions, as they are not for the sake of the end user. Essentially, how virtual functions work makes them slower
@@ -570,3 +570,26 @@
 - Derived classes may need to override operator<<. In this case, classes cannot make operator<< virutal. Instead, make use of a
   single operator<< override in the base class, and derived virtual functions that provide the output to operator<<. Example
   in derivedOutput.cpp.
+
+- Exceptions are a powerful part of the language. A standard try/catch block can be used in conjunction with throw statements
+  to assess failed expressions etc. and handle them appropriately. Catch blocks may catch a specific type of exception, or
+  use the ellipsis operator to catch any/all. Example in exceptions.cpp.
+
+- Exceptions will go through the following steps to resolve:
+  - Check if it is thrown directly within a try block with a corrosponding catch block that applies to the exception. If this
+    exists, the exception is resolved then and there. Else, proceed.
+  - Check to see if the function call resides within a try/catch block with a catch block that corrosponds to the exception
+    type. If exists, resovle. Else, proceed.
+  - Check the caller's caller etc up the call stack until a try/catch block with a good catch type is found, then resolve.
+    If one does not exist, proceed.
+  - Terminate the program printing the cause to the CLI.
+
+- Exceptions are especially useful for constructors. Example in exceptions.cpp.
+
+- Exceptions may throw a custom type e.g. std::exception. One may also create their own exceptions. Exceptions of a class
+  type, like the aforementioned std::exception or a user-defined type should always catch as const ExceptionType&. If
+  class-type catch types are chained together, they should start at the most specific, and proceed to the basest type.
+  Example in exceptions.cpp.
+
+- Exceptions are copied outside of the call stack when thrown to work around what would usually be a temporary lifetime.
+  This means that custom exception types must be copyable.
