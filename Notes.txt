@@ -487,7 +487,8 @@
 
 - Void pointers can be used to point to any data type, and reassigned to a different or same type. Example in "voidPointers.cpp"
 
-- Pointers can point to functions. Example in "funcPointers.cpp"/
+- Pointers can point to functions. They can either use the complex function-pointer syntax of C++, or simply use the auto keyword.
+  Function pointers can be passed to other functions, classes etc, or simply called as functions. Example in funcPointers.cpp.
 
 - Cpp files can take command line arguments using a special main function. Example in "commandLineArguments.cpp".
 
