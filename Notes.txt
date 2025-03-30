@@ -593,3 +593,7 @@
 
 - Exceptions are copied outside of the call stack when thrown to work around what would usually be a temporary lifetime.
   This means that custom exception types must be copyable.
+
+- String streams are useful for putting many different data types together into a string. They use mostly the same syntax
+  as std::iostream and other streams like std::fstream, and are easier to do certain operations with than std::string's.
+  Example in stringStreams.cpp.
