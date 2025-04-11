@@ -19,12 +19,7 @@
 .history
 .ionide
 
-# Folder for future no-uploads
-ignored/*
-
-# Make files
-*/build/
-build/
-CMakeLists.txt
+# Build Folders
+**/build/
 
 # End of https://www.toptal.com/developers/gitignore/api/visualstudiocode
