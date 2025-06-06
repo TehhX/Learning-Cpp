@@ -598,3 +598,6 @@
 - String streams are useful for putting many different data types together into a string. They use mostly the same syntax
   as std::iostream and other streams like std::fstream, and are easier to do certain operations with than std::string's.
   Example in stringStreams.cpp.
+
+- The syntax for function pointers is:
+    rType (*varName)(args)
